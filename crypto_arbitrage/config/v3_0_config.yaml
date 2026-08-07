@@ -1,0 +1,419 @@
+# 数字货币套利交易系统配置文件 V3.0
+# 智能自适应系统 - 自进化、自优化、自修复
+
+# DeepAgents 配置
+system:
+  name: "CryptoArbitrage"
+  version: "3.0"
+  mode: "simulation"  # simulation, paper_trading, live_trading
+  description: "智能自适应套利交易系统 V3.0"
+
+model:
+  provider: "anthropic"
+  model: "claude-sonnet-4-6"
+  temperature: 0.0
+  max_tokens: 4096
+
+# V3.0: 智能优化引擎配置
+intelligent_optimizer:
+  enabled: true
+  optimization_interval: 300  # 5分钟优化一次
+  history_window: 1000        # 历史数据窗口
+  min_data_points: 50         # 最少数据点
+  auto_optimize: true         # 自动优化
+  config_path: "config/optimization_state.json"
+
+  # 优化目标权重
+  objectives:
+    profit: 0.4          # 利润最大化
+    risk: 0.3            # 风险最小化
+    performance: 0.2     # 性能优化
+    stability: 0.1       # 稳定性提升
+
+  # 参数优化范围
+  parameter_ranges:
+    max_position_size:
+      min: 100
+      max: 2000
+      step: 100
+    min_profit_rate:
+      min: 0.1
+      max: 2.0
+      step: 0.1
+    max_volatility:
+      min: 1.0
+      max: 10.0
+      step: 0.5
+
+# V3.0: 智能知识管理配置
+knowledge_manager_v3:
+  enabled: true
+  cache_ttl: 300              # 知识缓存5分钟
+  auto_extract: true          # 自动从交易中提取知识
+  auto_classify: true         # 自动分类知识
+  quality_threshold: 0.6      # 知识质量阈值
+
+  # 知识提取配置
+  extraction:
+    from_trades: true         # 从交易结果提取
+    from_errors: true         # 从错误中提取
+    from_performance: true    # 从性能数据提取
+    min_confidence: 0.7       # 最小置信度
+
+  # 知识推荐配置
+  recommendation:
+    enabled: true
+    max_results: 5            # 最多推荐5条
+    min_relevance: 0.3        # 最小相关性
+
+# V3.0: 自适应错误处理配置
+adaptive_error_handler:
+  enabled: true
+  max_retries: 3             # 最大重试次数
+  retry_delay: 1.0           # 重试延迟（秒）
+  backoff_factor: 2.0        # 退避因子
+
+  # 熔断器配置
+  circuit_breaker:
+    failure_threshold: 5      # 失败阈值
+    timeout: 60.0            # 熔断超时（秒）
+    half_open_max_calls: 3   # 半开状态最大调用
+
+  # 错误预防配置
+  prevention:
+    enabled: true
+    prediction_window: 3600   # 预测窗口（秒）
+    min_pattern_count: 3     # 最小模式出现次数
+
+# 交易所配置
+exchanges:
+  binance:
+    enabled: true
+    api_key: "YOUR_BINANCE_API_KEY"
+    secret: "YOUR_BINANCE_SECRET"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+  okx:
+    enabled: true
+    api_key: "YOUR_OKX_API_KEY"
+    secret: "YOUR_OKX_SECRET"
+    passphrase: "YOUR_OKX_PASSPHRASE"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+  huobi:
+    enabled: false
+    api_key: "YOUR_HUOBI_API_KEY"
+    secret: "YOUR_HUOBI_SECRET"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+# 风险管理配置
+risk_management:
+  max_daily_loss: 500
+  max_position_size: 1000
+  max_total_exposure: 5000
+  max_drawdown: 10.0
+  min_liquidity_ratio: 0.5
+  base_stop_loss: 2.0
+  base_take_profit: 1.0
+  trailing_stop: 0.5
+  risk_reward_ratio: 2.0
+
+  # V3.0: 动态风险管理
+  dynamic_risk:
+    enabled: true
+    adjustment_interval: 600   # 10分钟调整一次
+    volatility_factor: 1.5     # 波动率因子
+    drawdown_factor: 2.0       # 回撤因子
+
+# TradingAgents配置 (V2.9 - 深度集成)
+trading_agents:
+  enabled: true
+  provider: "anthropic"
+  model: "claude-sonnet-4-6"
+  language: "Chinese"
+  preset: "standard"
+  cache_ttl: 300
+  signal_weight: 0.35
+
+# 信号融合配置 (V2.6)
+signal_fusion:
+  enabled: true
+  use_dynamic_weights: true
+  weights:
+    llm: 0.35
+    technical: 0.25
+    arbitrage: 0.25
+    risk: 0.15
+  divergence_threshold: 0.7
+
+# 可视化配置 (V2.6)
+visualization:
+  backtest_charts:
+    enabled: true
+    show_equity_curve: true
+    show_drawdown: true
+    show_returns_distribution: true
+    show_monthly_heatmap: true
+  knowledge_graph:
+    enabled: true
+    similarity_threshold: 0.3
+    max_nodes: 50
+  market_3d:
+    enabled: true
+    default_chart_type: "scatter"
+
+# Memo0 配置 (V2.8 - 完整知识循环)
+mem0:
+  api_key: ""  # 在 .env 文件中设置 MEM0_API_KEY
+  user_id: "crypto-arbitrage-user"
+  agent_id: "trading-bot"
+  rerank: true
+  keyword_search: false
+
+# 交易执行引擎配置
+transaction_executor:
+  enabled: true
+  max_concurrent_trades: 3
+  execution_timeout: 30
+  auto_retry: true
+  retry_delay: 5
+
+# 监控系统配置
+monitoring:
+  enabled: true
+  alert_methods:
+    - console
+    - memo0
+    - file
+  performance_thresholds:
+    scan_timeout: 10
+    execution_failure_rate: 0.1
+    low_profit_rate: 0.1
+    low_win_rate: 50
+  metrics_interval: 60
+
+# V3.0: 系统健康监控配置
+health_monitor:
+  enabled: true
+  check_interval: 60          # 健康检查间隔（秒）
+  prediction_horizon: 300     # 预测时间窗口（秒）
+
+  # 健康指标
+  metrics:
+    cpu_usage:
+      warning: 70
+      critical: 90
+    memory_usage:
+      warning: 70
+      critical: 90
+    disk_usage:
+      warning: 80
+      critical: 95
+    api_latency:
+      warning: 5.0
+      critical: 10.0
+
+  # 预防性维护
+  preventive_maintenance:
+    enabled: true
+    auto_cleanup: true        # 自动清理
+    cleanup_interval: 3600    # 清理间隔（秒）
+    log_retention_days: 7     # 日志保留天数
+
+# 通知系统配置
+notifications:
+  enabled: true
+  rate_limit_interval: 60
+  channels:
+    - type: "console"
+      enabled: true
+    - type: "file"
+      enabled: true
+    - type: "memo0"
+      enabled: true
+    - type: "email"
+      enabled: false
+      smtp_host: "smtp.gmail.com"
+      smtp_port: 587
+      username: "your_email@gmail.com"
+      password: "your_app_password"
+      to_addresses:
+        - "trader@example.com"
+    - type: "telegram"
+      enabled: false
+      bot_token: "YOUR_TELEGRAM_BOT_TOKEN"
+      chat_id: "YOUR_TELEGRAM_CHAT_ID"
+    - type: "webhook"
+      enabled: false
+      url: "YOUR_WEBHOOK_URL"
+
+# 策略管理器配置
+strategy_manager:
+  max_total_capital: 10000
+  max_strategy_allocation: 0.40
+  min_opportunity_score: 60
+  signal_aggregation: "weighted"
+
+  # V3.0: 自适应策略权重
+  adaptive_weights:
+    enabled: true
+    update_interval: 1800    # 30分钟更新一次
+    min_trades_for_weight: 10  # 最少交易数
+
+# 套利策略配置
+strategies:
+  cross_exchange:
+    enabled: true
+    min_profit_rate: 0.5
+    max_position_size: 1000
+    risk_tolerance: 0.1
+    symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+      - "BNB/USDT"
+      - "SOL/USDT"
+      - "DOGE/USDT"
+    scan_interval: 30
+    max_volatility: 5.0
+    min_liquidity: 10000
+    max_slippage: 0.1
+
+  triangular:
+    enabled: true
+    min_profit_rate: 0.3
+    max_position_size: 500
+    scan_interval: 30
+    triangles:
+      - base: "USDT"
+        path:
+          - from: "USDT"
+            to: "BTC"
+            pair: "BTC/USDT"
+          - from: "BTC"
+            to: "ETH"
+            pair: "ETH/BTC"
+          - from: "ETH"
+            to: "USDT"
+            pair: "ETH/USDT"
+      - base: "USDT"
+        path:
+          - from: "USDT"
+            to: "BTC"
+            pair: "BTC/USDT"
+          - from: "BTC"
+            to: "BNB"
+            pair: "BNB/BTC"
+          - from: "BNB"
+            to: "USDT"
+            pair: "BNB/USDT"
+
+  basis_trading:
+    enabled: true
+    min_profit_rate: 0.8
+    max_position_size: 2000
+    symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+    futures_exchange: "binance"
+    min_basis_spread: 0.2
+    holding_period: 7
+    execution_timeout: 120
+
+  funding_rate:
+    enabled: true
+    min_funding_rate: 0.05
+    max_position_size: 1500
+    max_funding_rate: 0.5
+    holding_periods: 3
+    symbols:
+      - "BTC/USDT:USDT"
+      - "ETH/USDT:USDT"
+    spot_symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+
+  statistical_arbitrage:
+    enabled: true
+    min_profit_rate: 0.4
+    max_position_size: 800
+    lookback_period: 100
+    z_score_threshold: 2.0
+    z_score_close: 0.5
+    max_holding_period: 86400
+    pairs:
+      - asset1: "BTC/USDT"
+        asset2: "ETH/USDT"
+        name: "BTC-ETH"
+      - asset1: "BTC/USDT"
+        asset2: "SOL/USDT"
+        name: "BTC-SOL"
+
+# 系统运行配置
+runtime:
+  scan_interval: 30
+  max_concurrent_trades: 3
+  trade_timeout: 60
+  log_level: "INFO"
+
+# 性能优化配置 (V2.7)
+performance:
+  enabled: true
+  async_llm:
+    enabled: true
+    max_workers: 3
+    cache_ttl: 300
+    timeout: 120
+  signal_cache:
+    enabled: true
+    max_size: 1000
+    default_ttl: 60
+  optimized_viz:
+    enabled: true
+    max_points: 1000
+    use_cache: true
+  monitoring:
+    enabled: true
+    window_size: 100
+    alert_threshold: 2.0
+
+# V3.0: 自适应系统配置
+adaptive_system:
+  enabled: true
+  learning_rate: 0.1          # 学习率
+  adaptation_interval: 600    # 适应间隔（秒）
+  min_confidence: 0.7         # 最小置信度
+
+  # 自适应特性
+  features:
+    auto_parameter_tuning: true    # 自动参数调优
+    auto_strategy_selection: true  # 自动策略选择
+    auto_risk_adjustment: true     # 自动风险调整
+    auto_performance_optimization: true # 自动性能优化
+
+# 存储配置
+storage:
+  knowledge_base_db: "crypto_arbitrage_knowledge.db"
+  trade_log_path: "logs/trades.log"
+  performance_log_path: "logs/performance.log"
+  alerts_log_path: "logs/alerts_*.log"
+  auto_save_interval: 300
+
+# V3.0: 系统进化配置
+system_evolution:
+  enabled: true
+  evolution_interval: 86400  # 24小时进化一次
+  knowledge_retention: 30     # 知识保留天数
+  performance_baseline_days: 7 # 性能基线天数
+
+  # 进化目标
+  goals:
+    maximize_profit: true
+    minimize_risk: true
+    optimize_performance: true
+    enhance_stability: true

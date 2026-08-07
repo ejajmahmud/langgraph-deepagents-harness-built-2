@@ -1,0 +1,22 @@
+{
+  "market_data": {
+    "status": "failed",
+    "error": "object HybridMemo0Storage can't be used in 'await' expression"
+  },
+  "opportunity_identification": {
+    "status": "failed",
+    "error": "'LowRiskArbitrageEngine' object has no attribute 'evaluate_opportunity'"
+  },
+  "risk_assessment": {
+    "status": "failed",
+    "error": "initialize_deep_risk_manager() missing 1 required positional argument: 'config'"
+  },
+  "trade_execution": {
+    "status": "failed",
+    "error": "object HybridMemo0Storage can't be used in 'await' expression"
+  },
+  "knowledge_base": {
+    "status": "failed",
+    "error": "'KnowledgeBase' object has no attribute 'get_all_knowledge'"
+  }
+}

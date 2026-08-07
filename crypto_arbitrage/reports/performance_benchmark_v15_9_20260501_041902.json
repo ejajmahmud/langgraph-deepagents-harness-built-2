@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-05-01T04:19:02.590986",
+  "config": {
+    "iterations": 100,
+    "warmup_iterations": 10
+  },
+  "results": {
+    "arbitrage_detect_opportunity": {
+      "operation": "arbitrage_detect_opportunity",
+      "iterations": 100,
+      "total_time": 0.00023310007236432284,
+      "mean_time": 0.0023310007236432284,
+      "median_time": 0.0021000014385208488,
+      "min_time": 0.0016999983927235007,
+      "max_time": 0.014000004739500582,
+      "p95_time": 0.005199995939619839,
+      "p99_time": 0.014000004739500582,
+      "std_dev": 0.0013917286794709015,
+      "throughput": 429000.29582018056
+    },
+    "arbitrage_assess_risk": {
+      "operation": "arbitrage_assess_risk",
+      "iterations": 100,
+      "total_time": 0.00023350001720245928,
+      "mean_time": 0.0023350001720245928,
+      "median_time": 0.0020000006770715117,
+      "min_time": 0.0016999983927235007,
+      "max_time": 0.013199998647905886,
+      "p95_time": 0.00549999822396785,
+      "p99_time": 0.013199998647905886,
+      "std_dev": 0.0014649698900053773,
+      "throughput": 428265.4930740055
+    },
+    "trading_create_order": {
+      "operation": "trading_create_order",
+      "iterations": 100,
+      "total_time": 0.00021929996728431433,
+      "mean_time": 0.0021929996728431433,
+      "median_time": 0.0020000006770715117,
+      "min_time": 0.0017999991541728377,
+      "max_time": 0.005900001269765198,
+      "p95_time": 0.004999994416721165,
+      "p99_time": 0.005900001269765198,
+      "std_dev": 0.0007650520432257839,
+      "throughput": 455996.42005579366
+    },
+    "trading_query_order": {
+      "operation": "trading_query_order",
+      "iterations": 100,
+      "total_time": 0.00019519994384609163,
+      "mean_time": 0.0019519994384609163,
+      "median_time": 0.0017999991541728377,
+      "min_time": 0.0014999968698248267,
+      "max_time": 0.0052000104915350676,
+      "p95_time": 0.004799992893822491,
+      "p99_time": 0.0052000104915350676,
+      "std_dev": 0.0007612428156456825,
+      "throughput": 512295.2293410828
+    }
+  }
+}

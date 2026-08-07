@@ -1,0 +1,265 @@
+# Alert rules for CryptoArbitrage V15.9
+# System health and performance monitoring
+
+groups:
+  - name: system_health
+    interval: 30s
+    rules:
+      # Application Health
+      - alert: ApplicationDown
+        expr: up{job="crypto-arbitrage-main"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          component: application
+        annotations:
+          summary: "CryptoArbitrage application is down"
+          description: "The CryptoArbitrage main application has been down for more than 1 minute."
+
+      # High Error Rate
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          component: application
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }} for the last 5 minutes."
+
+      # Memory Usage
+      - alert: HighMemoryUsage
+        expr: (process_resident_memory_bytes / process_virtual_memory_max_bytes) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          component: system
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage is above 80% ({{ $value | humanizePercentage }})."
+
+      - alert: CriticalMemoryUsage
+        expr: (process_resident_memory_bytes / process_virtual_memory_max_bytes) > 0.95
+        for: 1m
+        labels:
+          severity: critical
+          component: system
+        annotations:
+          summary: "Critical memory usage"
+          description: "Memory usage is above 95% ({{ $value | humanizePercentage }})."
+
+      # CPU Usage
+      - alert: HighCPUUsage
+        expr: rate(process_cpu_seconds_total[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          component: system
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is above 80% ({{ $value | humanizePercentage }})."
+
+      - alert: CriticalCPUUsage
+        expr: rate(process_cpu_seconds_total[2m]) > 0.95
+        for: 2m
+        labels:
+          severity: critical
+          component: system
+        annotations:
+          summary: "Critical CPU usage"
+          description: "CPU usage is above 95% ({{ $value | humanizePercentage }})."
+
+  - name: trading_performance
+    interval: 30s
+    rules:
+      # Arbitrage Opportunities
+      - alert: LowArbitrageOpportunities
+        expr: rate(arbitrage_opportunities_total[1h]) < 1
+        for: 10m
+        labels:
+          severity: info
+          component: arbitrage
+        annotations:
+          summary: "Low arbitrage opportunities"
+          description: "Arbitrage opportunities detection rate is low ({{ $value }}/hour)."
+
+      # Decision Engine Performance
+      - alert: SlowDecisionEngine
+        expr: histogram_quantile(0.95, decision_engine_duration_seconds) > 5
+        for: 5m
+        labels:
+          severity: warning
+          component: decision-engine
+        annotations:
+          summary: "Slow decision engine response"
+          description: "95th percentile of decision engine duration is {{ $value }}s."
+
+      - alert: VerySlowDecisionEngine
+        expr: histogram_quantile(0.95, decision_engine_duration_seconds) > 10
+        for: 2m
+        labels:
+          severity: critical
+          component: decision-engine
+        annotations:
+          summary: "Very slow decision engine response"
+          description: "95th percentile of decision engine duration is {{ $value }}s."
+
+  - name: knowledge_graph_monitoring
+    interval: 60s
+    rules:
+      # Knowledge Graph Health
+      - alert: KnowledgeGraphDown
+        expr: up{job="knowledge-graph"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          component: knowledge-graph
+        annotations:
+          summary: "Knowledge Graph engine is down"
+          description: "Knowledge Graph engine has been down for more than 2 minutes."
+
+      # Knowledge Base Size
+      - alert: KnowledgeBaseGrowing
+        expr: knowledge_graph_nodes_total > 100000
+        labels:
+          severity: info
+          component: knowledge-graph
+        annotations:
+          summary: "Knowledge base size is large"
+          description: "Knowledge graph has {{ $value }} nodes."
+
+      # Graph Query Performance
+      - alert: SlowGraphQueries
+        expr: histogram_quantile(0.95, graph_query_duration_seconds) > 2
+        for: 5m
+        labels:
+          severity: warning
+          component: knowledge-graph
+        annotations:
+          summary: "Slow graph queries"
+          description: "95th percentile of graph query duration is {{ $value }}s."
+
+  - name: storage_monitoring
+    interval: 30s
+    rules:
+      # Storage Connection
+      - alert: StorageConnectionFailed
+        expr: storage_connection_errors_total > 5
+        for: 2m
+        labels:
+          severity: warning
+          component: storage
+        annotations:
+          summary: "Storage connection errors"
+          description: "Storage connection errors: {{ $value }} in the last 2 minutes."
+
+      - alert: StorageWriteFailed
+        expr: rate(storage_write_errors_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          component: storage
+        annotations:
+          summary: "Storage write failures"
+          description: "Storage write error rate is {{ $value }}/s."
+
+      # Backup Status
+      - alert: BackupFailed
+        expr: backup_success_total == 0
+        for: 26h
+        labels:
+          severity: warning
+          component: backup
+        annotations:
+          summary: "Daily backup failed"
+          description: "No successful backup in the last 24 hours."
+
+      - alert: OldBackupAvailable
+        expr: time() - backup_last_success_timestamp > 172800  # 48 hours
+        labels:
+          severity: critical
+          component: backup
+        annotations:
+          summary: "No recent backup available"
+          description: "Last successful backup was more than 48 hours ago."
+
+  - name: risk_management
+    interval: 30s
+    rules:
+      # High Risk Exposure
+      - alert: HighRiskExposure
+        expr: risk_exposure_percentage > 0.7
+        for: 5m
+        labels:
+          severity: warning
+          component: risk-management
+        annotations:
+          summary: "High risk exposure"
+          description: "Risk exposure is {{ $value | humanizePercentage }}."
+
+      - alert: CriticalRiskExposure
+        expr: risk_exposure_percentage > 0.9
+        for: 1m
+        labels:
+          severity: critical
+          component: risk-management
+        annotations:
+          summary: "Critical risk exposure"
+          description: "Risk exposure is {{ $value | humanizePercentage }}."
+
+      # Drawdown Alert
+      - alert: HighDrawdown
+        expr: drawdown_percentage > 0.05
+        for: 1m
+        labels:
+          severity: warning
+          component: risk-management
+        annotations:
+          summary: "High drawdown detected"
+          description: "Drawdown is {{ $value | humanizePercentage }}."
+
+      - alert: CriticalDrawdown
+        expr: drawdown_percentage > 0.1
+        for: 30s
+        labels:
+          severity: critical
+          component: risk-management
+        annotations:
+          summary: "Critical drawdown detected"
+          description: "Drawdown is {{ $value | humanizePercentage }}."
+
+  - name: database_monitoring
+    interval: 30s
+    rules:
+      # Database Connection
+      - alert: DatabaseConnectionFailed
+        expr: database_connection_errors_total > 3
+        for: 2m
+        labels:
+          severity: critical
+          component: database
+        annotations:
+          summary: "Database connection errors"
+          description: "Database connection errors: {{ $value }} in the last 2 minutes."
+
+      # Slow Database Queries
+      - alert: SlowDatabaseQueries
+        expr: histogram_quantile(0.95, database_query_duration_seconds) > 1
+        for: 5m
+        labels:
+          severity: warning
+          component: database
+        annotations:
+          summary: "Slow database queries"
+          description: "95th percentile of query duration is {{ $value }}s."
+
+      # Database Locking
+      - alert: DatabaseLockWait
+        expr: rate(database_lock_wait_seconds_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          component: database
+        annotations:
+          summary: "Database lock contention"
+          description: "Database lock wait rate is {{ $value }}/s."

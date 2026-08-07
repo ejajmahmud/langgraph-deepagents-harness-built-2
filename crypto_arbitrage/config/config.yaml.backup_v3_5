@@ -1,0 +1,280 @@
+# 数字货币套利交易系统配置文件 V3.5
+
+# DeepAgents 配置
+system:
+  name: "CryptoArbitrage"
+  version: "3.5"
+  mode: "simulation"  # simulation, paper_trading, live_trading
+
+model:
+  provider: "anthropic"
+  model: "claude-sonnet-4-6"
+  temperature: 0.0
+  max_tokens: 4096
+
+# 交易所配置
+exchanges:
+  binance:
+    enabled: true
+    api_key: "YOUR_BINANCE_API_KEY"
+    secret: "YOUR_BINANCE_SECRET"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+  okx:
+    enabled: true
+    api_key: "YOUR_OKX_API_KEY"
+    secret: "YOUR_OKX_SECRET"
+    passphrase: "YOUR_OKX_PASSPHRASE"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+  huobi:
+    enabled: false
+    api_key: "YOUR_HUOBI_API_KEY"
+    secret: "YOUR_HUOBI_SECRET"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+# 风险管理配置
+risk_management:
+  max_daily_loss: 500
+  max_position_size: 1000
+  max_total_exposure: 5000
+  max_drawdown: 10.0
+  min_liquidity_ratio: 0.5
+  base_stop_loss: 2.0
+  base_take_profit: 1.0
+  trailing_stop: 0.5
+  risk_reward_ratio: 2.0
+
+# TradingAgents配置 (V2.9 - 深度集成)
+trading_agents:
+  enabled: true  # V2.9: 启用TradingAgents深度集成
+  provider: "anthropic"  # openai/google/anthropic/xai/openrouter/ollama
+  model: "claude-sonnet-4-6"
+  language: "Chinese"
+  preset: "standard"  # quick/standard/deep
+  cache_ttl: 300  # LLM分析缓存时间（秒）
+  signal_weight: 0.35  # V2.9: LLM信号权重（0-1）
+
+# 信号融合配置 (V2.6)
+signal_fusion:
+  enabled: true
+  use_dynamic_weights: true
+  weights:
+    llm: 0.35        # LLM信号权重
+    technical: 0.25   # 技术指标权重
+    arbitrage: 0.25   # 套利信号权重
+    risk: 0.15        # 风险信号权重
+  divergence_threshold: 0.7  # 分歧警告阈值
+
+# 可视化配置 (V2.6)
+visualization:
+  backtest_charts:
+    enabled: true
+    show_equity_curve: true
+    show_drawdown: true
+    show_returns_distribution: true
+    show_monthly_heatmap: true
+  knowledge_graph:
+    enabled: true
+    similarity_threshold: 0.3
+    max_nodes: 50
+  market_3d:
+    enabled: true
+    default_chart_type: "scatter"  # scatter/bar/surface
+
+# Memo0 配置 (V2.8 - 完整知识循环)
+# 获取 API Key: https://platform.mem0.ai
+# 环境变量优先: MEM0_API_KEY > config.yaml
+# 留空则使用 SQLite 降级模式（无 AI 功能）
+mem0:
+  api_key: ""  # 在 .env 文件中设置 MEM0_API_KEY
+  user_id: "crypto-arbitrage-user"
+  agent_id: "trading-bot"
+  rerank: true
+  keyword_search: false
+
+# 交易执行引擎配置
+transaction_executor:
+  enabled: true
+  max_concurrent_trades: 3
+  execution_timeout: 30
+  auto_retry: true
+  retry_delay: 5
+
+# 监控系统配置
+monitoring:
+  enabled: true
+  alert_methods:
+    - console
+    - memo0
+    - file
+  performance_thresholds:
+    scan_timeout: 10
+    execution_failure_rate: 0.1
+    low_profit_rate: 0.1
+    low_win_rate: 50
+  metrics_interval: 60
+
+# 通知系统配置
+notifications:
+  enabled: true
+  rate_limit_interval: 60
+  channels:
+    - type: "console"
+      enabled: true
+    - type: "file"
+      enabled: true
+    - type: "memo0"
+      enabled: true
+    - type: "email"
+      enabled: false
+      smtp_host: "smtp.gmail.com"
+      smtp_port: 587
+      username: "your_email@gmail.com"
+      password: "your_app_password"
+      to_addresses:
+        - "trader@example.com"
+    - type: "telegram"
+      enabled: false
+      bot_token: "YOUR_TELEGRAM_BOT_TOKEN"
+      chat_id: "YOUR_TELEGRAM_CHAT_ID"
+    - type: "webhook"
+      enabled: false
+      url: "YOUR_WEBHOOK_URL"
+
+# 策略管理器配置
+strategy_manager:
+  max_total_capital: 10000
+  max_strategy_allocation: 0.40
+  min_opportunity_score: 60
+  signal_aggregation: "weighted"
+
+# 套利策略配置
+strategies:
+  cross_exchange:
+    enabled: true
+    min_profit_rate: 0.5
+    max_position_size: 1000
+    risk_tolerance: 0.1
+    symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+      - "BNB/USDT"
+      - "SOL/USDT"
+      - "DOGE/USDT"
+    scan_interval: 30
+    max_volatility: 5.0
+    min_liquidity: 10000
+    max_slippage: 0.1
+
+  triangular:
+    enabled: true
+    min_profit_rate: 0.3
+    max_position_size: 500
+    scan_interval: 30
+    triangles:
+      - base: "USDT"
+        path:
+          - from: "USDT"
+            to: "BTC"
+            pair: "BTC/USDT"
+          - from: "BTC"
+            to: "ETH"
+            pair: "ETH/BTC"
+          - from: "ETH"
+            to: "USDT"
+            pair: "ETH/USDT"
+      - base: "USDT"
+        path:
+          - from: "USDT"
+            to: "BTC"
+            pair: "BTC/USDT"
+          - from: "BTC"
+            to: "BNB"
+            pair: "BNB/BTC"
+          - from: "BNB"
+            to: "USDT"
+            pair: "BNB/USDT"
+
+  basis_trading:
+    enabled: true
+    min_profit_rate: 0.8
+    max_position_size: 2000
+    symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+    futures_exchange: "binance"
+    min_basis_spread: 0.2
+    holding_period: 7
+    execution_timeout: 120
+
+  funding_rate:
+    enabled: true
+    min_funding_rate: 0.05
+    max_position_size: 1500
+    max_funding_rate: 0.5
+    holding_periods: 3
+    symbols:
+      - "BTC/USDT:USDT"
+      - "ETH/USDT:USDT"
+    spot_symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+
+  statistical_arbitrage:
+    enabled: true
+    min_profit_rate: 0.4
+    max_position_size: 800
+    lookback_period: 100
+    z_score_threshold: 2.0
+    z_score_close: 0.5
+    max_holding_period: 86400
+    pairs:
+      - asset1: "BTC/USDT"
+        asset2: "ETH/USDT"
+        name: "BTC-ETH"
+      - asset1: "BTC/USDT"
+        asset2: "SOL/USDT"
+        name: "BTC-SOL"
+
+# 系统运行配置
+runtime:
+  scan_interval: 30
+  max_concurrent_trades: 3
+  trade_timeout: 60
+  log_level: "INFO"
+
+# 性能优化配置 (V2.7)
+performance:
+  enabled: true
+  async_llm:
+    enabled: true
+    max_workers: 3
+    cache_ttl: 300
+    timeout: 120
+  signal_cache:
+    enabled: true
+    max_size: 1000
+    default_ttl: 60
+  optimized_viz:
+    enabled: true
+    max_points: 1000
+    use_cache: true
+  monitoring:
+    enabled: true
+    window_size: 100
+    alert_threshold: 2.0
+
+# 存储配置
+storage:
+  knowledge_base_db: "crypto_arbitrage_knowledge.db"
+  trade_log_path: "logs/trades.log"
+  performance_log_path: "logs/performance.log"
+  alerts_log_path: "logs/alerts_*.log"
+  auto_save_interval: 300

@@ -1,0 +1,25 @@
+{
+  "timestamp": "20260501_050520",
+  "results": {
+    "decision_making": {
+      "iterations": 100,
+      "total_time": 0.00016129997675307095,
+      "mean_time_ms": 0.0016129997675307095,
+      "median_time_ms": 0.0014999968698248267,
+      "min_time_ms": 0.0011999945854768157,
+      "max_time_ms": 0.007800001185387373,
+      "std_dev_ms": 0.0008084977317617426,
+      "throughput_ops_per_sec": 619962.8915823519
+    },
+    "knowledge_query": {
+      "iterations": 100,
+      "total_time": 7.22208349997527,
+      "mean_time_ms": 72.2208349997527,
+      "median_time_ms": 0.0051000097300857306,
+      "min_time_ms": 0.004699992132373154,
+      "max_time_ms": 1543.5649999999441,
+      "std_dev_ms": 316.846464737279,
+      "throughput_ops_per_sec": 13.846419803972417
+    }
+  }
+}

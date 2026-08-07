@@ -1,0 +1,325 @@
+{
+  "dashboard": {
+    "title": "CryptoArbitrage V15.9 - System Overview",
+    "uid": "crypto-arbitrage-v15-9-overview",
+    "tags": ["crypto-arbitrage", "v15.9", "system-overview"],
+    "timezone": "browser",
+    "refresh": "30s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "System Health Status",
+        "type": "stat",
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 3
+        },
+        "targets": [
+          {
+            "expr": "up{job=\"crypto-arbitrage-main\"}",
+            "legendFormat": "Application"
+          },
+          {
+            "expr": "up{job=\"knowledge-graph\"}",
+            "legendFormat": "Knowledge Graph"
+          },
+          {
+            "expr": "up{job=\"decision-engine\"}",
+            "legendFormat": "Decision Engine"
+          },
+          {
+            "expr": "up{job=\"arbitrage-engine\"}",
+            "legendFormat": "Arbitrage Engine"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                }
+              ]
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "red",
+                    "text": "DOWN"
+                  },
+                  "1": {
+                    "color": "green",
+                    "text": "UP"
+                  }
+                },
+                "type": "value"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "CPU Usage",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 3,
+          "w": 8,
+          "h": 6
+        },
+        "targets": [
+          {
+            "expr": "rate(process_cpu_seconds_total{job=\"crypto-arbitrage-main\"}[5m]) * 100",
+            "legendFormat": "CPU Usage %"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "percent",
+            "label": "CPU Usage"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Memory Usage",
+        "type": "graph",
+        "gridPos": {
+          "x": 8,
+          "y": 3,
+          "w": 8,
+          "h": 6
+        },
+        "targets": [
+          {
+            "expr": "process_resident_memory_bytes{job=\"crypto-arbitrage-main\"} / 1024 / 1024 / 1024",
+            "legendFormat": "Memory (GB)"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "decbytes",
+            "label": "Memory"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Request Rate",
+        "type": "graph",
+        "gridPos": {
+          "x": 16,
+          "y": 3,
+          "w": 8,
+          "h": 6
+        },
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "Requests/s"
+          },
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m])",
+            "legendFormat": "Errors/s"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Arbitrage Opportunities",
+        "type": "stat",
+        "gridPos": {
+          "x": 0,
+          "y": 9,
+          "w": 6,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "arbitrage_opportunities_total",
+            "legendFormat": "Total"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Decision Engine Performance",
+        "type": "graph",
+        "gridPos": {
+          "x": 6,
+          "y": 9,
+          "w": 12,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.50, decision_engine_duration_seconds)",
+            "legendFormat": "50th percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.95, decision_engine_duration_seconds)",
+            "legendFormat": "95th percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.99, decision_engine_duration_seconds)",
+            "legendFormat": "99th percentile"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Success Rate",
+        "type": "stat",
+        "gridPos": {
+          "x": 18,
+          "y": 9,
+          "w": 6,
+          "h": 4
+        },
+        "targets": [
+          {
+            "expr": "rate(decisions_successful_total[5m]) / rate(decisions_total[5m]) * 100",
+            "legendFormat": "Success Rate"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "Knowledge Graph Size",
+        "type": "graph",
+        "gridPos": {
+          "x": 0,
+          "y": 13,
+          "w": 12,
+          "h": 6
+        },
+        "targets": [
+          {
+            "expr": "knowledge_graph_nodes_total",
+            "legendFormat": "Nodes"
+          },
+          {
+            "expr": "knowledge_graph_edges_total",
+            "legendFormat": "Edges"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Risk Exposure",
+        "type": "gauge",
+        "gridPos": {
+          "x": 12,
+          "y": 13,
+          "w": 6,
+          "h": 6
+        },
+        "targets": [
+          {
+            "expr": "risk_exposure_percentage * 100",
+            "legendFormat": "Risk Exposure"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 50
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 10,
+        "title": "Storage Performance",
+        "type": "graph",
+        "gridPos": {
+          "x": 18,
+          "y": 13,
+          "w": 6,
+          "h": 6
+        },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, storage_query_duration_seconds)",
+            "legendFormat": "95th percentile"
+          },
+          {
+            "expr": "rate(storage_operations_total[5m])",
+            "legendFormat": "Ops/s"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Recent Alerts",
+        "type": "table",
+        "gridPos": {
+          "x": 0,
+          "y": 19,
+          "w": 24,
+          "h": 6
+        },
+        "targets": [
+          {
+            "expr": "ALERTS{}",
+            "format": "table",
+            "instant": true
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {
+                "Severity": 0,
+                "Alert": 1,
+                "Value": 2
+              },
+              "renameByName": {}
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

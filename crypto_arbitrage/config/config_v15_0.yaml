@@ -1,0 +1,481 @@
+# 数字货币套利交易系统配置文件 V15.0
+# 深度优化版 - 完善Memo0云存储 + 性能优化 + 测试提升
+
+# ========================================
+# DeepAgents 配置
+# ========================================
+system:
+  name: "CryptoArbitrage"
+  version: "15.0"
+  mode: "simulation"  # simulation, paper_trading, live_trading
+
+model:
+  provider: "anthropic"
+  model: "claude-sonnet-4-6"
+  temperature: 0.0
+  max_tokens: 4096
+
+# ========================================
+# V15.0 混合存储系统配置
+# ========================================
+hybrid_storage_v15:
+  enabled: true  # 启用V15.0混合存储系统
+
+  # 存储层级配置
+  storage_tiers:
+    hot_cache:
+      enabled: true
+      size: 1000  # 热缓存大小
+      ttl: 300  # 缓存过期时间（秒）
+
+    local_fast:
+      enabled: true
+      path: "./data/hybrid_storage.db"
+      pool_size: 10  # 连接池大小
+
+    cloud_primary:
+      enabled: true
+      provider: "memo0"  # memo0, custom_cloud
+
+    cloud_backup:
+      enabled: false
+      provider: "s3"  # s3, azure, gcs
+
+  # 智能路由配置
+  intelligent_routing:
+    enabled: true
+    read_preference: "hot_cache_first"  # hot_cache_first, cloud_first, balanced
+    write_preference: "async_cloud"  # immediate, async_cloud, local_only
+    search_strategy: "hybrid"  # hybrid, cloud_only, local_only
+
+  # 故障切换配置
+  failover:
+    enabled: true
+    auto_switch: true
+    health_check_interval: 60  # 健康检查间隔（秒）
+    max_failures_before_switch: 3
+
+  # 数据同步配置
+  synchronization:
+    enabled: true
+    sync_interval: 300  # 同步间隔（秒）
+    batch_size: 100  # 批量同步大小
+    conflict_resolution: "cloud_wins"  # cloud_wins, local_wins, merge
+
+  # 性能优化配置
+  performance:
+    compression:
+      enabled: true
+      threshold: 500  # 压缩阈值（字节）
+      algorithm: "gzip"  # gzip, zlib, brotli
+
+    caching:
+      enabled: true
+      search_cache_size: 500
+      result_cache_ttl: 180
+
+    async_operations:
+      enabled: true
+      max_workers: 4
+      queue_size: 1000
+
+# ========================================
+# Memo0 云存储配置 (V15.0 优化版)
+# ========================================
+mem0:
+  # API 配置
+  api_key: ""  # 在 .env 文件中设置 MEM0_API_KEY
+  api_endpoint: "https://api.mem0.ai"  # API 端点
+  timeout: 30  # 请求超时（秒）
+
+  # 用户和Agent配置
+  user_id: "crypto-arbitrage-v15-user"
+  agent_id: "trading-bot-v15"
+  session_id: "auto"  # auto 或自定义会话ID
+
+  # 搜索配置
+  search:
+    rerank: true
+    keyword_search: false
+    top_k: 20
+    score_threshold: 0.6
+    max_results: 50
+
+  # 缓存配置
+  cache:
+    enabled: true
+    ttl: 300  # 缓存过期时间（秒）
+    size: 2000  # 最大缓存条目数
+    prefetch_enabled: true  # 启用预取
+
+  # 熔断器配置
+  circuit_breaker:
+    enabled: true
+    failure_threshold: 5
+    cooldown_period: 120  # 冷却期（秒）
+    half_open_timeout: 30  # 半开状态超时
+
+  # 重试配置
+  retry:
+    enabled: true
+    max_attempts: 3
+    backoff_factor: 2.0
+    initial_delay: 1.0  # 初始延迟（秒）
+
+  # V15.0 语义搜索增强
+  semantic_search:
+    enabled: true
+    embedding_model: "text-embedding-ada-002"  # 嵌入模型
+    similarity_threshold: 0.75
+    dimension: 1536  # 嵌入维度
+    batch_size: 10
+
+  # 知识管理增强
+  knowledge_management:
+    auto_classification: true
+    quality_scoring: true
+    duplicate_detection: true
+    knowledge_expiry: 2592000  # 知识过期时间（30天）
+    max_knowledge_per_category: 10000
+
+  # V15.0 预测性分析
+  predictive_analysis:
+    enabled: true
+    pattern_recognition: true
+    confidence_threshold: 0.7
+    prediction_horizon: 3600  # 预测时间范围（秒）
+
+# ========================================
+# 本地向量存储配置 (降级方案)
+# ========================================
+local_vector_storage:
+  enabled: true  # 启用本地向量存储
+  db_path: "./data/local_vector_v15.db"
+
+  # 向量搜索配置
+  vector_search:
+    enabled: true
+    algorithm: "hnsw"  # hnsw, ivf, brute_force
+    ef_construction: 200
+    m_parameter: 16
+
+  # 缓存配置
+  cache:
+    enabled: true
+    size: 1500
+    ttl: 600
+
+  # 性能优化
+  performance:
+    index_type: "memory"  # memory, disk, hybrid
+    parallel_search: true
+    max_threads: 4
+
+# ========================================
+# 低风险套利引擎 V15.0 配置
+# ========================================
+low_risk_arbitrage_engine_v15:
+  enabled: true
+
+  # 预检机制增强
+  pre_check:
+    enabled: true
+    risk_assessment: true
+    liquidity_check: true
+    volatility_analysis: true
+    correlation_check: true
+
+  # 执行优化
+  execution:
+    step_verification: true
+    auto_rollback: true
+    max_execution_time: 30
+    parallel_steps: false  # 是否并行执行步骤
+
+  # 风险控制增强
+  risk_control:
+    dynamic_stop_loss: true
+    trailing_stop_enabled: true
+    position_sizing: "kelly"  # kelly, fixed, percent, volatility
+    max_correlation_exposure: 0.7
+
+  # 性能监控
+  monitoring:
+    real_time_tracking: true
+    performance_metrics: true
+    anomaly_detection: true
+    alert_thresholds:
+      execution_timeout: 25
+      profit_decline: 0.5
+      risk_spike: 0.8
+
+# ========================================
+# V15.0 测试优化配置
+# ========================================
+testing_v15:
+  enabled: true
+
+  # 测试覆盖率目标
+  coverage:
+    target_overall: 0.90  # 总体目标90%
+    target_critical: 0.95  # 关键模块95%
+    target_strategies: 0.90  # 策略模块90%
+
+  # 测试执行配置
+  execution:
+    parallel_tests: true
+    max_workers: 4
+    timeout: 120
+    retry_failed: true
+    max_retries: 2
+
+  # Mock配置
+  mocking:
+    external_apis: true
+    database_operations: true
+    exchange_connections: true
+
+  # 测试数据管理
+  test_data:
+    auto_generate: true
+    cache_test_data: true
+    validate_integrity: true
+
+  # 持续集成
+  ci_cd:
+    enabled: true
+    pre_commit_hooks: true
+    coverage_gates: true
+    performance_regression: true
+
+# ========================================
+# V15.0 性能基准配置
+# ========================================
+performance_benchmarks:
+  enabled: true
+
+  # 响应时间目标
+  latency_targets:
+    api_calls: 100  # 毫秒
+    search_operations: 200
+    trade_execution: 1000
+    risk_assessment: 500
+
+  # 吞吐量目标
+  throughput_targets:
+    trades_per_minute: 10
+    api_calls_per_second: 100
+    search_queries_per_second: 50
+
+  # 资源使用限制
+  resource_limits:
+    max_memory_mb: 2048
+    max_cpu_percent: 80
+    max_disk_io_mb_s: 100
+
+  # 性能监控
+  monitoring:
+    enabled: true
+    alert_on_degradation: true
+    degradation_threshold: 0.8  # 性能下降阈值
+    auto_optimization: true
+
+# ========================================
+# 交易所配置 (保持不变)
+# ========================================
+exchanges:
+  binance:
+    enabled: true
+    api_key: "YOUR_BINANCE_API_KEY"
+    secret: "YOUR_BINANCE_SECRET"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+  okx:
+    enabled: true
+    api_key: "YOUR_OKX_API_KEY"
+    secret: "YOUR_OKX_SECRET"
+    passphrase: "YOUR_OKX_PASSPHRASE"
+    testnet: false
+    options:
+      defaultType: "spot"
+
+# ========================================
+# 风险管理配置 (增强版)
+# ========================================
+risk_management:
+  max_daily_loss: 500
+  max_position_size: 1000
+  max_total_exposure: 5000
+  max_drawdown: 10.0
+  min_liquidity_ratio: 0.5
+  base_stop_loss: 2.0
+  base_take_profit: 1.0
+  trailing_stop: 0.5
+  risk_reward_ratio: 2.0
+
+  # V15.0 增强风险管理
+  enhanced_risk:
+    enabled: true
+    portfolio_var: true  # 投资组合方差风险
+    correlation_risk: true  # 相关性风险
+    liquidity_risk: true  # 流动性风险
+    concentration_risk: true  # 集中度风险
+
+  # 动态风险调整
+  dynamic_adjustment:
+    enabled: true
+    volatility_scaling: true
+    market_condition_adjustment: true
+    learning_period: 1000  # 学习期（交易次数）
+
+# ========================================
+# TradingAgents配置 (V15.0 优化版)
+# ========================================
+trading_agents:
+  enabled: true
+  provider: "anthropic"
+  model: "claude-sonnet-4-6"
+  language: "Chinese"
+  preset: "standard"
+  cache_ttl: 300
+  signal_weight: 0.35
+
+  # V15.0 并行分析增强
+  parallel_analysis:
+    enabled: true
+    max_concurrent_analyses: 5
+    queue_size: 20
+
+  # 自适应策略切换
+  adaptive_strategy:
+    enabled: true
+    market_condition_detection: true
+    performance_feedback: true
+    adaptation_interval: 3600
+
+# ========================================
+# 套利策略配置 (优化参数)
+# ========================================
+strategies:
+  cross_exchange:
+    enabled: true
+    min_profit_rate: 0.5
+    max_position_size: 1000
+    risk_tolerance: 0.1
+    symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+      - "BNB/USDT"
+      - "SOL/USDT"
+      - "DOGE/USDT"
+    scan_interval: 30
+    max_volatility: 5.0
+    min_liquidity: 10000
+    max_slippage: 0.1
+
+  triangular:
+    enabled: true
+    min_profit_rate: 0.3
+    max_position_size: 500
+    scan_interval: 30
+    triangles:
+      - base: "USDT"
+        path:
+          - from: "USDT"
+            to: "BTC"
+            pair: "BTC/USDT"
+          - from: "BTC"
+            to: "ETH"
+            pair: "ETH/BTC"
+          - from: "ETH"
+            to: "USDT"
+            pair: "ETH/USDT"
+      - base: "USDT"
+        path:
+          - from: "USDT"
+            to: "BTC"
+            pair: "BTC/USDT"
+          - from: "BTC"
+            to: "BNB"
+            pair: "BNB/BTC"
+          - from: "BNB"
+            to: "USDT"
+            pair: "BNB/USDT"
+
+  basis_trading:
+    enabled: true
+    min_profit_rate: 0.8
+    max_position_size: 2000
+    symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+    futures_exchange: "binance"
+    min_basis_spread: 0.2
+    holding_period: 7
+    execution_timeout: 120
+
+  funding_rate:
+    enabled: true
+    min_funding_rate: 0.05
+    max_position_size: 1500
+    max_funding_rate: 0.5
+    holding_periods: 3
+    symbols:
+      - "BTC/USDT:USDT"
+      - "ETH/USDT:USDT"
+    spot_symbols:
+      - "BTC/USDT"
+      - "ETH/USDT"
+
+  statistical_arbitrage:
+    enabled: true
+    min_profit_rate: 0.4
+    max_position_size: 800
+    lookback_period: 100
+    z_score_threshold: 2.0
+    z_score_close: 0.5
+    max_holding_period: 86400
+    pairs:
+      - asset1: "BTC/USDT"
+        asset2: "ETH/USDT"
+        name: "BTC-ETH"
+      - asset1: "BTC/USDT"
+        asset2: "SOL/USDT"
+        name: "BTC-SOL"
+
+# ========================================
+# 系统运行配置
+# ========================================
+runtime:
+  scan_interval: 30
+  max_concurrent_trades: 3
+  trade_timeout: 60
+  log_level: "INFO"
+
+# ========================================
+# 监控系统配置
+# ========================================
+monitoring:
+  enabled: true
+  alert_methods:
+    - console
+    - memo0
+    - file
+  performance_thresholds:
+    scan_timeout: 10
+    execution_failure_rate: 0.1
+    low_profit_rate: 0.1
+    low_win_rate: 50
+  metrics_interval: 60
+
+# ========================================
+# 存储配置
+# ========================================
+storage:
+  knowledge_base_db: "crypto_arbitrage_knowledge.db"
+  trade_log_path: "logs/trades.log"
+  performance_log_path: "logs/performance.log"
+  alerts_log_path: "logs/alerts_*.log"
+  auto_save_interval: 300

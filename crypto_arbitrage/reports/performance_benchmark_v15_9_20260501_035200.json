@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-05-01T03:52:00.288470",
+  "config": {
+    "iterations": 100,
+    "warmup_iterations": 10
+  },
+  "results": {
+    "arbitrage_detect_opportunity": {
+      "operation": "arbitrage_detect_opportunity",
+      "iterations": 100,
+      "total_time": 0.0001432000135537237,
+      "mean_time": 0.001432000135537237,
+      "median_time": 0.0012999953469261527,
+      "min_time": 0.0011999945854768157,
+      "max_time": 0.004699992132373154,
+      "p95_time": 0.003000008291564882,
+      "p99_time": 0.004699992132373154,
+      "std_dev": 0.0005920137797568765,
+      "throughput": 698323.9562507685
+    },
+    "arbitrage_assess_risk": {
+      "operation": "arbitrage_assess_risk",
+      "iterations": 100,
+      "total_time": 0.0001391999830957502,
+      "mean_time": 0.0013919998309575021,
+      "median_time": 0.0011999945854768157,
+      "min_time": 0.0010999938240274787,
+      "max_time": 0.006700007361359894,
+      "p95_time": 0.0028999929782003164,
+      "p99_time": 0.006700007361359894,
+      "std_dev": 0.0007917095085395616,
+      "throughput": 718390.8918380681
+    },
+    "trading_create_order": {
+      "operation": "trading_create_order",
+      "iterations": 100,
+      "total_time": 0.00012549999519251287,
+      "mean_time": 0.0012549999519251287,
+      "median_time": 0.0011999945854768157,
+      "min_time": 0.0010999938240274787,
+      "max_time": 0.0030999945010989904,
+      "p95_time": 0.0026000052457675338,
+      "p99_time": 0.0030999945010989904,
+      "std_dev": 0.00037264388758958617,
+      "throughput": 796812.7795272286
+    },
+    "trading_query_order": {
+      "operation": "trading_query_order",
+      "iterations": 100,
+      "total_time": 0.00011719999019987881,
+      "mean_time": 0.0011719999019987881,
+      "median_time": 0.0010999938240274787,
+      "min_time": 0.0009999930625781417,
+      "max_time": 0.0033999967854470015,
+      "p95_time": 0.0026999914553016424,
+      "p99_time": 0.0033999967854470015,
+      "std_dev": 0.0004249971888838667,
+      "throughput": 853242.3921662017
+    }
+  }
+}

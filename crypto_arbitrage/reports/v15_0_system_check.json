@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-04-29T21:11:42.595099",
+  "system_version": "15.0",
+  "checks": {
+    "hybrid_storage": {
+      "status": "healthy",
+      "cloud_available": false,
+      "local_available": true,
+      "cache_hit_rate": 0.0,
+      "error_rate": 0
+    },
+    "knowledge_base": {
+      "status": "healthy",
+      "strategies_count": 18,
+      "knowledge_entries_count": 66,
+      "trades_count": 1,
+      "total_profit": 0.0,
+      "win_rate": 0.0
+    },
+    "arbitrage_engine": {
+      "status": "healthy",
+      "total_executions": 0,
+      "success_rate": 0,
+      "rollback_rate": 0,
+      "average_profit": 0
+    },
+    "risk_manager": {
+      "status": "healthy"
+    }
+  },
+  "overall_status": "healthy"
+}

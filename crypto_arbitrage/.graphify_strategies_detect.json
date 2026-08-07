@@ -1,0 +1,30 @@
+{
+  "files": {
+    "code": [
+      "base.py",
+      "basis_trading.py",
+      "cross_exchange.py",
+      "enhanced_low_risk_arbitrage_engine.py",
+      "enhanced_low_risk_arbitrage_engine_v5_2.py",
+      "enhanced_low_risk_arbitrage_engine_v5_9.py",
+      "enhanced_low_risk_arbitrage_v15_6.py",
+      "funding_rate.py",
+      "intelligent_strategy_enhancer.py",
+      "low_risk_arbitrage_engine.py",
+      "statistical_arbitrage.py",
+      "strategy_manager.py",
+      "triangular_arbitrage.py",
+      "__init__.py"
+    ],
+    "document": [],
+    "paper": [],
+    "image": [],
+    "video": []
+  },
+  "total_files": 14,
+  "total_words": 15421,
+  "needs_graph": false,
+  "warning": "Corpus is ~15,421 words - fits in a single context window. You may not need a graph.",
+  "skipped_sensitive": [],
+  "graphifyignore_patterns": 0
+}

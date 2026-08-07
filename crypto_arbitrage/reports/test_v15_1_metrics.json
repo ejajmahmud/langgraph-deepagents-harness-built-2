@@ -1,0 +1,13 @@
+{
+  "total_test_time": 2.020267963409424,
+  "component_init_times": {
+    "all_core_components": 2.00421142578125
+  },
+  "execution_times": {},
+  "success_rates": {
+    "complete_trading_workflow": "0/1",
+    "performance_benchmarks": "0/1"
+  },
+  "overall_success_rate": 0.0,
+  "performance_metrics": {}
+}

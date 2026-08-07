@@ -1,0 +1,10 @@
+# Memo0 配置文件模板
+# 复制此文件为 config/mem0.json 并填入您的 API Key
+
+{
+    "api_key": "your-mem0-api-key-here",
+    "user_id": "crypto-arbitrage-user",
+    "agent_id": "trading-bot",
+    "rerank": true,
+    "keyword_search": false
+}

@@ -1,0 +1,119 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "deepagents-crypto-trading"
+version = "0.1.0"
+description = "Low-risk cryptocurrency arbitrage trading system"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = []
+maintainers = []
+keywords = ["crypto", "trading", "arbitrage", "deepagents", "blockchain"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "deepagents",
+    "python-dotenv>=1.2.1",
+    "httpx>=0.28.0",
+    "websockets>=13.0",
+    "pydantic>=2.0.0",
+    "numpy>=1.26.0",
+    "pandas>=2.0.0",
+]
+
+[dependency-groups]
+test = [
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.14.0",
+    "pytest-socket>=0.7.0",
+    "pytest-timeout>=2.3.1",
+    "ruff>=0.9.7",
+    "ty>=0.0.1,<1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/langchain-ai/deepagents"
+Repository = "https://github.com/langchain-ai/deepagents"
+Issues = "https://github.com/langchain-ai/deepagents/issues"
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+deepagents = { path = "../deepagents", editable = true }
+
+[tool.ty.environment]
+python-version = "3.11"
+extra-paths = ["../deepagents"]
+
+[tool.ty.rules]
+division-by-zero = "error"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM812",  # Messes with the formatter
+    "ISC001",  # Messes with the formatter
+    "ANN401",  # Dynamically typed expressions
+]
+
+[tool.ruff.lint.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.isort]
+force-single-line = false
+combine-as-imports = true
+known-first-party = ["deepagents_crypto_trading"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+ignore-var-parameters = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "ANN001",
+    "ANN201",
+    "ANN202",
+    "ANN205",
+    "ARG",
+    "C901",
+    "D",
+    "DOC",
+    "F401",
+    "PLC0415",
+    "PLR0912",
+    "PLR2004",
+    "PLR6301",
+    "RUF012",
+    "RUF100",
+    "S",
+    "SLF001",
+    "TC002",
+    "W605",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

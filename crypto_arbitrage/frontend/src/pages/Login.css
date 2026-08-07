@@ -1,0 +1,28 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.login-card .ant-card-head-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 16px;
+  color: #00000073;
+  font-size: 13px;
+}

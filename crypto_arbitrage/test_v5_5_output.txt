@@ -1,0 +1,275 @@
+2026-04-18 22:17:24,507 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:24,508 - __main__ - INFO - V5.4 迭代：Memo0 实际对接和深度集成
+2026-04-18 22:17:24,508 - __main__ - INFO - 开始时间: 2026-04-18 22:17:24
+2026-04-18 22:17:24,508 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:24,508 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:24,508 - __main__ - INFO - V5.4 Memo0 实际对接迭代启动
+2026-04-18 22:17:24,508 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:24,508 - __main__ - INFO - 步骤 1: 加载系统配置...
+2026-04-18 22:17:24,508 - config.config_manager - INFO - 配置管理器初始化，配置路径: D:\03_AITOOL\deepagents\crypto_arbitrage\config\config.yaml
+2026-04-18 22:17:24,545 - config.config_manager - INFO - 成功加载配置文件: D:\03_AITOOL\deepagents\crypto_arbitrage\config\config.yaml
+2026-04-18 22:17:24,546 - config.config_manager - INFO - 从配置文件加载配置: D:\03_AITOOL\deepagents\crypto_arbitrage\config\config.yaml
+2026-04-18 22:17:24,549 - config.config_manager - INFO - 执行 V5.1 配置验证...
+2026-04-18 22:17:24,549 - config.config_validator - INFO - 开始配置验证...
+2026-04-18 22:17:24,549 - config.config_validator - INFO - \u2705 配置验证通过
+2026-04-18 22:17:24,549 - config.config_validator - WARNING - \u26a0\ufe0f 发现 1 个警告
+2026-04-18 22:17:24,549 - config.config_manager - WARNING - 配置验证发现 1 个警告
+2026-04-18 22:17:24,549 - config.config_manager - WARNING -   [WARNING] mem0.api_key: Memo0 API Key 未配置，系统将使用 SQLite 降级模式
+2026-04-18 22:17:24,549 - config.config_manager - INFO -     建议: 设置 MEM0_API_KEY 环境变量或在配置文件中设置 mem0.api_key
+2026-04-18 22:17:24,550 - config.config_manager - INFO - 配置优化建议 (1 条):
+2026-04-18 22:17:24,550 - config.config_manager - INFO -   - 建议配置 Memo0 API Key 以启用 AI 搜索和知识关联功能
+2026-04-18 22:17:24,551 - __main__ - INFO -    \u2705 配置加载成功 (版本: 5.2)
+2026-04-18 22:17:24,551 - __main__ - INFO - 步骤 2: 初始化统一存储...
+2026-04-18 22:17:24,552 - storage.mem0_storage - INFO - 统一存储初始化: 使用 SQLite
+2026-04-18 22:17:24,552 - __main__ - INFO -    \u26a0\ufe0f  Memo0状态: SQLite降级模式
+2026-04-18 22:17:24,552 - __main__ - INFO -    \u2705 统一存储: 已初始化
+2026-04-18 22:17:24,552 - __main__ - INFO -    存储模式: SQLite
+2026-04-18 22:17:24,552 - __main__ - INFO - 步骤 3: 检查 Memo0 配置...
+2026-04-18 22:17:24,552 - __main__ - WARNING -    \u26a0\ufe0f  Memo0 API Key: 未配置
+2026-04-18 22:17:24,552 - __main__ - INFO -    \U0001f4a1 配置方法:
+2026-04-18 22:17:24,552 - __main__ - INFO -       方法1: 环境变量 MEM0_API_KEY=your_key_here
+2026-04-18 22:17:24,552 - __main__ - INFO -       方法2: 配置文件 config.yaml -> mem0.api_key
+2026-04-18 22:17:24,552 - __main__ - INFO -       参考: V5.3_MEMO0_SETUP_GUIDE.md
+2026-04-18 22:17:24,552 - __main__ - INFO -    \u2705 User ID: crypto-arbitrage-v52-user
+2026-04-18 22:17:24,553 - __main__ - INFO -    \u2705 Agent ID: trading-bot-v52
+2026-04-18 22:17:24,553 - __main__ - INFO -    \u2705 语义搜索: 已启用
+2026-04-18 22:17:24,553 - __main__ - INFO -       相似度阈值: 0.7
+2026-04-18 22:17:24,553 - __main__ - INFO -       最大结果: 20
+2026-04-18 22:17:24,553 - __main__ - INFO - 步骤 4: 初始化 V5.2 代理...
+2026-04-18 22:17:24,574 - tools.exchange_api - INFO - 成功初始化交易所: binance
+2026-04-18 22:17:24,582 - tools.exchange_api - INFO - 成功初始化交易所: okx
+2026-04-18 22:17:24,594 - tools.exchange_api - INFO - 成功初始化交易所: huobi
+2026-04-18 22:17:24,595 - tools.risk_management - INFO - 风险管理器初始化完成
+2026-04-18 22:17:24,595 - tools.monitoring - INFO - 监控系统初始化完成
+2026-04-18 22:17:24,595 - tools.notifier - INFO - 通知系统初始化完成: 3 个渠道
+2026-04-18 22:17:24,595 - strategies.strategy_manager - INFO - 市场条件分析器已启用
+2026-04-18 22:17:24,595 - strategies.strategy_manager - INFO - 智能止损系统已启用
+2026-04-18 22:17:24,595 - storage.market_pattern_recognizer - INFO - 市场模式识别器初始化完成
+2026-04-18 22:17:24,595 - strategies.strategy_manager - INFO - 市场模式识别器已启用
+2026-04-18 22:17:24,595 - storage.strategy_optimizer - INFO - 策略优化器初始化完成
+2026-04-18 22:17:24,595 - strategies.strategy_manager - INFO - 策略优化器已启用
+2026-04-18 22:17:24,596 - storage.auto_knowledge_accumulator - INFO - 自动知识积累器初始化成功
+2026-04-18 22:17:24,596 - strategies.strategy_manager - INFO - \u2705 自动知识积累器已启用 (V2.8)
+2026-04-18 22:17:24,596 - storage.intelligent_decision_engine - INFO - 智能决策引擎初始化成功
+2026-04-18 22:17:24,596 - strategies.strategy_manager - INFO - \u2705 智能决策引擎已启用 (V2.2)
+2026-04-18 22:17:24,597 - strategies.strategy_manager - INFO - 多策略组合管理器初始化完成
+2026-04-18 22:17:24,597 - strategies.base - INFO - cross_exchange 策略初始化完成
+2026-04-18 22:17:24,597 - strategies.base - INFO - triangular 策略初始化完成
+2026-04-18 22:17:24,597 - strategies.base - INFO - basis_trading 策略初始化完成
+2026-04-18 22:17:24,597 - strategies.base - INFO - funding_rate 策略初始化完成
+2026-04-18 22:17:24,597 - strategies.base - INFO - statistical_arbitrage 策略初始化完成
+2026-04-18 22:17:24,597 - agents.main_agent_v5_2 - INFO - 初始化 5 个交易策略: ['cross_exchange', 'triangular', 'basis_trading', 'funding_rate', 'statistical_arbitrage']
+2026-04-18 22:17:24,597 - strategies.strategy_manager - INFO - 策略注册成功: cross_exchange (分配: 30%)
+2026-04-18 22:17:24,597 - strategies.strategy_manager - INFO - 策略注册成功: triangular (分配: 20%)
+2026-04-18 22:17:24,597 - strategies.strategy_manager - INFO - 策略注册成功: basis_trading (分配: 20%)
+2026-04-18 22:17:24,597 - strategies.strategy_manager - INFO - 策略注册成功: funding_rate (分配: 20%)
+2026-04-18 22:17:24,597 - strategies.strategy_manager - INFO - 策略注册成功: statistical_arbitrage (分配: 10%)
+2026-04-18 22:17:24,597 - tools.transaction_executor - INFO - 交易执行引擎初始化完成
+2026-04-18 22:17:24,598 - tools.transaction_executor - INFO - 交易执行引擎初始化完成
+2026-04-18 22:17:24,598 - agents.main_agent_v5_2 - INFO - 存储初始化完成，使用 SQLite
+2026-04-18 22:17:24,598 - storage.intelligent_decision_engine_v5_2 - INFO - \u2705 V5.2 智能决策引擎初始化成功 (Memo0模式)
+2026-04-18 22:17:24,598 - agents.main_agent_v5_2 - INFO - \u2705 V5.2智能决策引擎已启动 (Memo0深度集成)
+2026-04-18 22:17:24,598 - strategies.low_risk_arbitrage_engine - INFO - 低风险套利引擎 V3.2 初始化完成
+2026-04-18 22:17:24,598 - strategies.enhanced_low_risk_arbitrage_engine - INFO - \u2705 增强版低风险套利引擎 V4.1 初始化完成
+2026-04-18 22:17:24,598 - strategies.enhanced_low_risk_arbitrage_engine - INFO -    - 风险预测: \u26a0\ufe0f 未启用
+2026-04-18 22:17:24,598 - strategies.enhanced_low_risk_arbitrage_engine - INFO -    - 健康监控: \u26a0\ufe0f 未启用
+2026-04-18 22:17:24,598 - strategies.enhanced_low_risk_arbitrage_engine - INFO -    - 智能决策: \u26a0\ufe0f 未启用
+2026-04-18 22:17:24,598 - strategies.enhanced_low_risk_arbitrage_engine - INFO -    - 知识记录: \u26a0\ufe0f 未启用
+2026-04-18 22:17:24,598 - strategies.enhanced_low_risk_arbitrage_engine_v5_2 - INFO - \u2705 V5.2 增强版低风险套利引擎初始化成功 (智能深度集成)
+2026-04-18 22:17:24,598 - agents.main_agent_v5_2 - INFO - \u2705 V5.2增强版低风险套利引擎已启动 (智能深度集成)
+2026-04-18 22:17:24,599 - tools.intelligent_optimizer - INFO - IntelligentOptimizer initialized: interval=300s, window=1000, min_points=50
+2026-04-18 22:17:24,599 - tools.intelligent_optimizer - INFO - Performing optimization...
+2026-04-18 22:17:24,599 - tools.intelligent_optimizer - INFO - Auto-optimization started (interval=300s)
+2026-04-18 22:17:24,600 - agents.main_agent_v5_2 - INFO - \u2705 智能优化引擎 V3.0 已启动
+2026-04-18 22:17:24,599 - tools.intelligent_optimizer - WARNING - No strategy performance data for weight optimization
+2026-04-18 22:17:24,600 - tools.knowledge_manager_v3 - INFO - IntelligentKnowledgeManager V3.0 initialized
+2026-04-18 22:17:24,600 - agents.main_agent_v5_2 - INFO - \u2705 智能知识管理器 V3.0 已启动
+2026-04-18 22:17:24,600 - tools.adaptive_error_handler - INFO - AdaptiveErrorHandler V3.0 initialized
+2026-04-18 22:17:24,600 - agents.main_agent_v5_2 - INFO - \u2705 自适应错误处理器 V3.0 已启动
+2026-04-18 22:17:24,600 - agents.main_agent_v5_2 - INFO - 使用模型: anthropic:claude-sonnet-4-6
+2026-04-18 22:17:24,611 - tools.intelligent_optimizer - INFO - Optimization completed
+2026-04-18 22:17:25,234 - backend.auth - INFO - 默认管理员账户已创建 (用户名: admin)
+2026-04-18 22:17:25,234 - agents.main_agent_v5_2 - INFO - API Backend 已注册
+2026-04-18 22:17:25,234 - agents.main_agent_v5_2 - INFO - 数字货币套利交易 Agent V5.2 初始化完成 (智能深度集成 + Memo0语义搜索)
+2026-04-18 22:17:25,234 - __main__ - INFO -    \u2705 V5.2 代理初始化成功
+2026-04-18 22:17:25,234 - __main__ - INFO - 
+\u2705 初始化完成
+
+2026-04-18 22:17:25,234 - __main__ - INFO - 
+================================================================================
+2026-04-18 22:17:25,235 - __main__ - INFO - 测试 1: Memo0 深度集成功能
+2026-04-18 22:17:25,235 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:25,235 - __main__ - INFO - 
+测试 1.1: 添加交易知识...
+2026-04-18 22:17:25,235 - __main__ - INFO -    \u2705 知识 1/3: strategy - 跨交易所套利策略在低波动率市场中表现稳定，胜率可达75%以上...
+2026-04-18 22:17:25,236 - __main__ - INFO -    \u2705 知识 2/3: risk - 当市场波动率超过3.0时，应降低仓位至50%并设置更严格的止损...
+2026-04-18 22:17:25,236 - __main__ - INFO -    \u2705 知识 3/3: market - BTC/USDT 在流动性充足时，三角套利机会出现的频率增加30%...
+2026-04-18 22:17:25,236 - __main__ - INFO - 
+测试 1.2: 语义搜索...
+2026-04-18 22:17:25,236 - __main__ - INFO -    查询: 低波动率市场的最佳策略
+2026-04-18 22:17:25,236 - __main__ - INFO -    结果数量: 0
+2026-04-18 22:17:25,236 - __main__ - INFO -    查询: 高波动率时的风险管理
+2026-04-18 22:17:25,236 - __main__ - INFO -    结果数量: 0
+2026-04-18 22:17:25,236 - __main__ - INFO -    查询: BTC三角套利机会
+2026-04-18 22:17:25,236 - __main__ - INFO -    结果数量: 0
+2026-04-18 22:17:25,236 - __main__ - INFO - 
+测试 1.3: 获取所有知识...
+2026-04-18 22:17:25,236 - __main__ - INFO -    知识总数: 3
+2026-04-18 22:17:25,236 - __main__ - INFO -    知识类别分布:
+2026-04-18 22:17:25,236 - __main__ - INFO -       strategy: 1
+2026-04-18 22:17:25,236 - __main__ - INFO -       risk: 1
+2026-04-18 22:17:25,236 - __main__ - INFO -       market: 1
+2026-04-18 22:17:25,237 - __main__ - INFO - 
+================================================================================
+2026-04-18 22:17:25,237 - __main__ - INFO - 测试 2: V5.2 智能决策引擎
+2026-04-18 22:17:25,237 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:25,237 - __main__ - INFO - 
+测试 2.1: 智能策略推荐...
+2026-04-18 22:17:25,237 - storage.intelligent_decision_engine_v5_2 - ERROR - Memo0语义搜索失败: UnifiedStorage.search_knowledge() got an unexpected keyword argument 'metadata_filter'，使用降级存储
+2026-04-18 22:17:25,237 - storage.intelligent_decision_engine_v5_2 - WARNING - 降级存储不可用，返回空结果
+2026-04-18 22:17:25,237 - __main__ - INFO -    \u2705 策略推荐完成
+2026-04-18 22:17:25,237 - __main__ - INFO -    数据源: memo0_semantic_search
+2026-04-18 22:17:25,237 - __main__ - INFO -    市场分析:
+2026-04-18 22:17:25,237 - __main__ - INFO -       波动率: 中
+2026-04-18 22:17:25,237 - __main__ - INFO -       趋势: 弱
+2026-04-18 22:17:25,237 - __main__ - INFO -       流动性: 正常
+2026-04-18 22:17:25,237 - __main__ - INFO -    推荐策略:
+2026-04-18 22:17:25,237 - __main__ - INFO - 
+测试 2.2: 智能风险评估...
+2026-04-18 22:17:25,237 - storage.intelligent_decision_engine_v5_2 - ERROR - 历史风险搜索失败: UnifiedStorage.search_knowledge() got an unexpected keyword argument 'metadata_filter'
+2026-04-18 22:17:25,238 - __main__ - INFO -    \u2705 风险评估完成
+2026-04-18 22:17:25,238 - __main__ - INFO -    风险等级: LOW
+2026-04-18 22:17:25,238 - __main__ - INFO -    风险评分: 0/100
+2026-04-18 22:17:25,238 - __main__ - INFO - 
+测试 2.3: 决策引擎统计...
+2026-04-18 22:17:25,238 - __main__ - INFO -    \u2705 统计信息获取完成
+2026-04-18 22:17:25,238 - __main__ - INFO -    总查询数: 1
+2026-04-18 22:17:25,238 - __main__ - INFO -    缓存命中: 0
+2026-04-18 22:17:25,238 - __main__ - INFO -    缓存命中率: 0.0%
+2026-04-18 22:17:25,238 - __main__ - INFO -    Memo0查询: 1
+2026-04-18 22:17:25,238 - __main__ - INFO -    降级查询: 0
+2026-04-18 22:17:25,238 - __main__ - INFO -    Memo0可用: 是
+2026-04-18 22:17:25,238 - __main__ - INFO - 
+================================================================================
+2026-04-18 22:17:25,238 - __main__ - INFO - 测试 3: V5.2 增强版低风险套利引擎
+2026-04-18 22:17:25,238 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:25,238 - __main__ - INFO - 
+测试 3.1: 智能机会评估...
+2026-04-18 22:17:25,239 - storage.intelligent_decision_engine_v5_2 - ERROR - Memo0语义搜索失败: UnifiedStorage.search_knowledge() got an unexpected keyword argument 'metadata_filter'，使用降级存储
+2026-04-18 22:17:25,239 - storage.intelligent_decision_engine_v5_2 - WARNING - 降级存储不可用，返回空结果
+2026-04-18 22:17:25,239 - storage.intelligent_decision_engine_v5_2 - ERROR - 历史风险搜索失败: UnifiedStorage.search_knowledge() got an unexpected keyword argument 'metadata_filter'
+2026-04-18 22:17:25,239 - strategies.enhanced_low_risk_arbitrage_engine_v5_2 - INFO - \U0001f6ab 智能决策建议拒绝
+2026-04-18 22:17:25,239 - __main__ - INFO -    \u2705 智能评估完成
+2026-04-18 22:17:25,239 - __main__ - INFO -    执行建议: 拒绝
+2026-04-18 22:17:25,239 - __main__ - INFO -    置信度: 0.00
+2026-04-18 22:17:25,239 - __main__ - INFO -    自适应风险参数:
+2026-04-18 22:17:25,239 - __main__ - INFO -       调整后仓位: $1200.00
+2026-04-18 22:17:25,239 - __main__ - INFO -       调整后止损: 1.67%
+2026-04-18 22:17:25,239 - __main__ - INFO -       调整因子: 1.20
+2026-04-18 22:17:25,239 - __main__ - INFO -    预期结果:
+2026-04-18 22:17:25,239 - __main__ - INFO -       成功概率: 0.0%
+2026-04-18 22:17:25,239 - __main__ - INFO -       预期利润: $180.00
+2026-04-18 22:17:25,240 - __main__ - INFO -       风险调整收益: $180.00
+2026-04-18 22:17:25,240 - __main__ - INFO - 
+测试 3.2: 执行路径优化...
+2026-04-18 22:17:25,240 - __main__ - INFO -    \u2705 路径优化完成
+2026-04-18 22:17:25,240 - __main__ - INFO -    优化状态: 已优化
+2026-04-18 22:17:25,240 - __main__ - INFO -    执行步骤:
+2026-04-18 22:17:25,240 - __main__ - INFO -       1. buy binance
+2026-04-18 22:17:25,240 - __main__ - INFO -       2. sell okx
+2026-04-18 22:17:25,240 - __main__ - INFO - 
+测试 3.3: 知识学习功能...
+2026-04-18 22:17:25,240 - __main__ - ERROR -    \u274c V5.2增强版低风险套利引擎测试失败: 'EnhancedArbitrageExecution' object has no attribute 'strategy'
+2026-04-18 22:17:25,240 - __main__ - INFO - 
+================================================================================
+2026-04-18 22:17:25,240 - __main__ - INFO - 测试 4: 知识关联和智能推理
+2026-04-18 22:17:25,240 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:25,240 - __main__ - INFO - 
+测试 4.1: 添加关联知识...
+2026-04-18 22:17:25,240 - __main__ - INFO -    \u2705 关联知识 1: 策略
+2026-04-18 22:17:25,240 - __main__ - INFO -    \u2705 关联知识 2: 风险管理
+2026-04-18 22:17:25,240 - __main__ - INFO -    \u2705 关联知识 3: 市场条件
+2026-04-18 22:17:25,240 - __main__ - INFO -    \u2705 关联知识 4: 历史数据
+2026-04-18 22:17:25,241 - __main__ - INFO - 
+测试 4.2: 语义关联查询...
+2026-04-18 22:17:25,241 - __main__ - INFO - 
+   查询: 高波动率环境下跨交易所套利的最佳实践
+2026-04-18 22:17:25,241 - __main__ - INFO -    结果数量: 0
+2026-04-18 22:17:25,241 - __main__ - INFO - 
+   查询: 如何根据历史数据优化风险管理策略
+2026-04-18 22:17:25,241 - __main__ - INFO -    结果数量: 0
+2026-04-18 22:17:25,241 - __main__ - INFO - 
+   查询: 降低仓位对套利收益的影响
+2026-04-18 22:17:25,241 - __main__ - INFO -    结果数量: 0
+2026-04-18 22:17:25,241 - __main__ - INFO - 
+测试 4.3: 知识质量分析...
+2026-04-18 22:17:25,241 - __main__ - INFO -    知识质量指标:
+2026-04-18 22:17:25,241 - __main__ - INFO -       总知识数: 7
+2026-04-18 22:17:25,241 - __main__ - INFO -       有元数据: 3 (42.9%)
+2026-04-18 22:17:25,241 - __main__ - INFO -       类别数: 7
+2026-04-18 22:17:25,241 - __main__ - INFO -       平均长度: 27 字符
+2026-04-18 22:17:25,242 - __main__ - INFO - 
+================================================================================
+2026-04-18 22:17:25,242 - __main__ - INFO - V5.4 Memo0 实际对接测试报告
+2026-04-18 22:17:25,242 - __main__ - INFO - ================================================================================
+2026-04-18 22:17:25,242 - __main__ - INFO - 
+测试摘要:
+2026-04-18 22:17:25,242 - __main__ - INFO -   总测试数: 4
+2026-04-18 22:17:25,242 - __main__ - INFO -   通过: 3
+2026-04-18 22:17:25,242 - __main__ - INFO -   失败: 1
+2026-04-18 22:17:25,242 - __main__ - INFO -   通过率: 75.0%
+2026-04-18 22:17:25,242 - __main__ - INFO - 
+详细结果:
+2026-04-18 22:17:25,242 - __main__ - INFO -   1. \u2705 Memo0深度集成
+2026-04-18 22:17:25,242 - __main__ - INFO -      状态: PASSED
+2026-04-18 22:17:25,242 - __main__ - INFO -      消息: 成功添加3条知识，语义搜索正常
+2026-04-18 22:17:25,242 - __main__ - INFO -      时间: 2026-04-18T22:17:25.236261
+2026-04-18 22:17:25,242 - __main__ - INFO -   2. \u2705 V5.2智能决策引擎
+2026-04-18 22:17:25,242 - __main__ - INFO -      状态: PASSED
+2026-04-18 22:17:25,242 - __main__ - INFO -      消息: 所有决策引擎测试通过
+2026-04-18 22:17:25,242 - __main__ - INFO -      时间: 2026-04-18T22:17:25.238271
+2026-04-18 22:17:25,242 - __main__ - INFO -   3. \u274c V5.2增强版低风险套利引擎
+2026-04-18 22:17:25,242 - __main__ - INFO -      状态: FAILED
+2026-04-18 22:17:25,243 - __main__ - INFO -      消息: 测试失败: 'EnhancedArbitrageExecution' object has no attribute 'strategy'
+2026-04-18 22:17:25,243 - __main__ - INFO -      时间: 2026-04-18T22:17:25.240777
+2026-04-18 22:17:25,243 - __main__ - INFO -   4. \u2705 知识关联和智能推理
+2026-04-18 22:17:25,243 - __main__ - INFO -      状态: PASSED
+2026-04-18 22:17:25,243 - __main__ - INFO -      消息: 知识关联正常，质量指标良好
+2026-04-18 22:17:25,243 - __main__ - INFO -      时间: 2026-04-18T22:17:25.241787
+2026-04-18 22:17:25,243 - __main__ - INFO - 
+系统能力评估:
+2026-04-18 22:17:25,243 - __main__ - INFO -   Memo0状态: \u26a0\ufe0f  SQLite降级
+2026-04-18 22:17:25,243 - __main__ - INFO -   知识库规模: 7 条
+2026-04-18 22:17:25,243 - __main__ - INFO -   存储模式: SQLite
+2026-04-18 22:17:25,243 - __main__ - INFO -   决策引擎查询: 2
+2026-04-18 22:17:25,243 - __main__ - INFO -   缓存命中率: 0.0%
+2026-04-18 22:17:25,243 - __main__ - INFO -   智能决策: 1
+2026-04-18 22:17:25,243 - __main__ - INFO -   知识学习: 1
+2026-04-18 22:17:25,243 - __main__ - INFO - 
+下一步建议:
+2026-04-18 22:17:25,243 - __main__ - INFO -   1. 配置 Memo0 API Key 以启用完整AI功能
+2026-04-18 22:17:25,243 - __main__ - INFO -      参考: V5.3_MEMO0_SETUP_GUIDE.md
+2026-04-18 22:17:25,243 - __main__ - INFO -   2. 在生产环境中进行实际交易验证
+2026-04-18 22:17:25,244 - __main__ - INFO -   3. 监控知识库增长和决策质量
+2026-04-18 22:17:25,244 - __main__ - INFO -   4. 根据实际表现优化参数配置
+2026-04-18 22:17:25,244 - __main__ - WARNING - 
+\u26a0\ufe0f  发现 1 个失败的测试，请检查错误信息
+2026-04-18 22:17:25,244 - agents.main_agent_v5_2 - INFO - 正在优雅停止 Agent V5.2...
+2026-04-18 22:17:25,244 - strategies.base - INFO - cross_exchange 策略已停止
+2026-04-18 22:17:25,244 - strategies.base - INFO - triangular 策略已停止
+2026-04-18 22:17:25,244 - strategies.base - INFO - basis_trading 策略已停止
+2026-04-18 22:17:25,244 - strategies.base - INFO - funding_rate 策略已停止
+2026-04-18 22:17:25,244 - strategies.base - INFO - statistical_arbitrage 策略已停止
+2026-04-18 22:17:25,244 - agents.main_agent_v5_2 - WARNING - 停止智能优化引擎失败: 'IntelligentOptimizer' object has no attribute 'stop'
+2026-04-18 22:17:25,244 - agents.main_agent_v5_2 - WARNING - 停止智能知识管理器失败: 'IntelligentKnowledgeManager' object has no attribute 'stop_processing'
+2026-04-18 22:17:25,244 - agents.main_agent_v5_2 - WARNING - 保存优化状态失败: 'IntelligentOptimizer' object has no attribute 'save_state'
+2026-04-18 22:17:25,498 - tools.exchange_api - INFO - 已关闭交易所连接: binance
+2026-04-18 22:17:25,763 - tools.exchange_api - INFO - 已关闭交易所连接: okx
+2026-04-18 22:17:26,027 - tools.exchange_api - INFO - 已关闭交易所连接: huobi
+2026-04-18 22:17:26,027 - agents.main_agent_v5_2 - INFO - Agent V5.2 已停止
+2026-04-18 22:17:26,027 - __main__ - INFO - \u2705 V5.2 代理已停止
+2026-04-18 22:17:26,027 - __main__ - INFO - 
+================================================================================
+2026-04-18 22:17:26,027 - __main__ - INFO - V5.4 迭代完成
+2026-04-18 22:17:26,027 - __main__ - INFO - 完成时间: 2026-04-18 22:17:26
+2026-04-18 22:17:26,028 - __main__ - INFO - ================================================================================

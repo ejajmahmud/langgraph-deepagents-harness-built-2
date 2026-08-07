@@ -1,0 +1,113 @@
+{
+  "timestamp": "2026-05-01T04:32:10.115916",
+  "config": {
+    "iterations": 100,
+    "warmup_iterations": 10
+  },
+  "results": {
+    "storage_add_knowledge": {
+      "operation": "storage_add_knowledge",
+      "iterations": 100,
+      "total_time": 0.5590738000464626,
+      "mean_time": 5.590738000464626,
+      "median_time": 5.273799994029105,
+      "min_time": 4.285200004233047,
+      "max_time": 16.203999999561347,
+      "p95_time": 7.3312000022269785,
+      "p99_time": 16.203999999561347,
+      "std_dev": 1.4379696156552089,
+      "throughput": 178.867262232087
+    },
+    "storage_get_knowledge": {
+      "operation": "storage_get_knowledge",
+      "iterations": 100,
+      "total_time": 0.017933000010089017,
+      "mean_time": 0.17933000010089017,
+      "median_time": 0.17145000310847536,
+      "min_time": 0.1621999981580302,
+      "max_time": 0.2960999991046265,
+      "p95_time": 0.21209999977145344,
+      "p99_time": 0.2960999991046265,
+      "std_dev": 0.022062063430487534,
+      "throughput": 5576.31182422018
+    },
+    "storage_search_knowledge": {
+      "operation": "storage_search_knowledge",
+      "iterations": 100,
+      "total_time": 0.0005291999987093732,
+      "mean_time": 0.005291999987093732,
+      "median_time": 0.0049000082071870565,
+      "min_time": 0.004599991370923817,
+      "max_time": 0.012499993317760527,
+      "p95_time": 0.011199997970834374,
+      "p99_time": 0.012499993317760527,
+      "std_dev": 0.001499404859617025,
+      "throughput": 188964.4751396119
+    },
+    "storage_batch_add": {
+      "operation": "storage_batch_add",
+      "iterations": 100,
+      "total_time": 6.353366099938285,
+      "mean_time": 63.533660999382846,
+      "median_time": 59.43025001033675,
+      "min_time": 45.871800000895746,
+      "max_time": 173.7617000035243,
+      "p95_time": 109.76419999497011,
+      "p99_time": 173.7617000035243,
+      "std_dev": 19.062251960230068,
+      "throughput": 15.739687974374934
+    },
+    "arbitrage_detect_opportunity": {
+      "operation": "arbitrage_detect_opportunity",
+      "iterations": 100,
+      "total_time": 0.00020939995010849088,
+      "mean_time": 0.002093999501084909,
+      "median_time": 0.0014999968698248267,
+      "min_time": 0.0012999953469261527,
+      "max_time": 0.02469999890308827,
+      "p95_time": 0.0035999983083456755,
+      "p99_time": 0.02469999890308827,
+      "std_dev": 0.0024256962537254597,
+      "throughput": 477555.03259761824
+    },
+    "arbitrage_assess_risk": {
+      "operation": "arbitrage_assess_risk",
+      "iterations": 100,
+      "total_time": 0.00014290001126937568,
+      "mean_time": 0.0014290001126937568,
+      "median_time": 0.0012999953469261527,
+      "min_time": 0.0011999945854768157,
+      "max_time": 0.0035999983083456755,
+      "p95_time": 0.003200009814463556,
+      "p99_time": 0.0035999983083456755,
+      "std_dev": 0.00048519407502751577,
+      "throughput": 699790.0077942862
+    },
+    "trading_create_order": {
+      "operation": "trading_create_order",
+      "iterations": 100,
+      "total_time": 0.00014379997446667403,
+      "mean_time": 0.0014379997446667403,
+      "median_time": 0.001300009898841381,
+      "min_time": 0.001200009137392044,
+      "max_time": 0.0039000005926936865,
+      "p95_time": 0.0030999945010989904,
+      "p99_time": 0.0039000005926936865,
+      "std_dev": 0.00043199753195283534,
+      "throughput": 695410.4155503535
+    },
+    "trading_query_order": {
+      "operation": "trading_query_order",
+      "iterations": 100,
+      "total_time": 0.00013079987547826022,
+      "mean_time": 0.0013079987547826022,
+      "median_time": 0.0011999945854768157,
+      "min_time": 0.0010999938240274787,
+      "max_time": 0.0035999983083456755,
+      "p95_time": 0.0029999937396496534,
+      "p99_time": 0.0035999983083456755,
+      "std_dev": 0.00043033362526216065,
+      "throughput": 764526.7217140482
+    }
+  }
+}

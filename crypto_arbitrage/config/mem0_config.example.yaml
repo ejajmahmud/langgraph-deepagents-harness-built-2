@@ -1,0 +1,122 @@
+# Memo0 AI 存储配置示例
+# V3.9 迭代 - 风险预测与预警机制集成
+
+# 复制此文件为 config/mem0_config.yaml 并填入您的配置
+
+# ==================== 基础配置 ====================
+memo0:
+  # Memo0 Platform API 密钥（必需）
+  # 获取方式：访问 https://platform.mem0.ai/ 注册并获取 API Key
+  api_key: "your-mem0-api-key-here"
+
+  # 用户标识符（可选，默认：crypto-arbitrage-user）
+  user_id: "crypto-arbitrage-user"
+
+  # Agent 标识符（可选，默认：crypto-arbitrage）
+  agent_id: "crypto-arbitrage"
+
+  # 是否启用重排序（可选，默认：true）
+  rerank: true
+
+  # 是否启用关键词搜索（可选，默认：false）
+  keyword_search: false
+
+# ==================== 高级配置 ====================
+advanced:
+  # 熔断器配置
+  circuit_breaker:
+    # 触发熔断的连续失败次数（默认：5）
+    threshold: 5
+    # 熔断冷却时间（秒，默认：120）
+    cooldown_seconds: 120
+
+  # 缓存配置
+  cache:
+    # 是否启用缓存（默认：true）
+    enabled: true
+    # 缓存 TTL（秒，默认：300）
+    ttl: 300
+    # 最大缓存条目数（默认：1000）
+    max_entries: 1000
+
+  # 异步配置
+  async:
+    # 是否启用异步同步（默认：true）
+    enabled: true
+    # 同步线程数量（默认：2）
+    sync_threads: 2
+    # 批量同步大小（默认：10）
+    batch_size: 10
+
+# ==================== 风险预测集成 ====================
+risk_prediction:
+  # 是否将风险预测结果存储到 Memo0（默认：true）
+  store_predictions: true
+
+  # 是否存储预警历史（默认：true）
+  store_warnings: true
+
+  # 是否存储极端事件（默认：true）
+  store_extreme_events: true
+
+  # 预测数据保留天数（默认：30）
+  retention_days: 30
+
+  # 是否启用语义搜索（默认：true）
+  enable_semantic_search: true
+
+# ==================== 知识库集成 ====================
+knowledge_base:
+  # 是否自动从交易数据提取知识（默认：true）
+  auto_extract: true
+
+  # 知识分类标签
+  categories:
+    - "strategy"
+    - "risk"
+    - "market"
+    - "execution"
+    - "prediction"
+    - "warning"
+
+  # 最小知识置信度（0-1，默认：0.7）
+  min_confidence: 0.7
+
+# ==================== 监控和日志 ====================
+monitoring:
+  # 是否启用性能监控（默认：true）
+  enabled: true
+
+  # 日志级别（DEBUG/INFO/WARNING/ERROR，默认：INFO）
+  log_level: "INFO"
+
+  # 是否记录 API 调用（默认：false）
+  log_api_calls: false
+
+  # 是否记录缓存命中率（默认：true）
+  log_cache_hits: true
+
+# ==================== 降级配置 ====================
+fallback:
+  # 是否启用降级到 SQLite（默认：true）
+  enabled: true
+
+  # SQLite 数据库路径（默认：storage/knowledge_base.db）
+  sqlite_path: "storage/knowledge_base.db"
+
+  # 降级模式下的最大查询结果数（默认：50）
+  max_results: 50
+
+# ==================== 安全配置 ====================
+security:
+  # API 密钥加密（可选，默认：false）
+  encrypt_api_key: false
+
+  # 请求超时（秒，默认：30）
+  request_timeout: 30
+
+  # 最大重试次数（默认：3）
+  max_retries: 3
+
+  # 重试延迟（毫秒，默认：1000）
+  retry_delay: 1000

@@ -1,0 +1,123 @@
+.main-layout {
+  min-height: 100vh;
+}
+
+.layout-sider {
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 16px;
+  border-radius: 6px;
+  color: white;
+  flex-direction: column;
+}
+
+.logo h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1;
+}
+
+.logo p {
+  font-size: 12px;
+  margin: 4px 0 0 0;
+  opacity: 0.8;
+}
+
+.layout-header {
+  background: #fff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  margin-left: 200px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.status-badge,
+.ws-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.status-dot,
+.ws-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-dot.running,
+.ws-dot.connected {
+  background: #52c41a;
+  box-shadow: 0 0 4px #52c41a;
+}
+
+.status-dot.stopped,
+.ws-dot.disconnected {
+  background: #ff4d4f;
+  box-shadow: 0 0 4px #ff4d4f;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #000000d9;
+  transition: color 0.3s;
+}
+
+.header-icon:hover {
+  color: #1890ff;
+}
+
+.header-avatar {
+  cursor: pointer;
+  background: #1890ff;
+}
+
+.layout-content {
+  margin-left: 200px;
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: calc(100vh - 64px);
+}
+
+/* 收起侧边栏时的样式调整 */
+.ant-layout-sider-collapsed + .ant-layout .layout-header {
+  margin-left: 80px;
+}
+
+.ant-layout-sider-collapsed + .ant-layout .layout-content {
+  margin-left: 80px;
+}

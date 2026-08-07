@@ -1,0 +1,21 @@
+{
+  "complete_trading_workflow": {
+    "status": "failed",
+    "error": "'HybridMemo0Storage' object has no attribute 'store_data'",
+    "traceback": "<traceback object at 0x000001DBF0E29F00>"
+  },
+  "performance_benchmarks": {
+    "status": "failed",
+    "error": "'DeepRiskManager' object has no attribute 'assess_risk'"
+  },
+  "real_scenario_simulation": {
+    "status": "success",
+    "scenarios_tested": 3,
+    "scenario_results": [],
+    "summary": {
+      "successful_scenarios": 0,
+      "total_signals_generated": 0,
+      "avg_risk_level": "UNKNOWN"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+# Prometheus configuration for CryptoArbitrage V15.9
+# Enhanced monitoring with comprehensive metrics and alerting
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'crypto-arbitrage-v15_9'
+    environment: 'production'
+
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - 'alertmanager:9093'
+
+# Load alert rules
+rule_files:
+  - 'alerts/*.yml'
+
+# Scrape configurations
+scrape_configs:
+  # CryptoArbitrage main application
+  - job_name: 'crypto-arbitrage-main'
+    static_configs:
+      - targets: ['crypto-arbitrage:8080']
+        labels:
+          application: 'crypto-arbitrage'
+          version: 'v15.9'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+
+  # Knowledge Graph Engine
+  - job_name: 'knowledge-graph'
+    static_configs:
+      - targets: ['crypto-arbitrage:8080']
+        labels:
+          component: 'knowledge-graph'
+          version: 'v15.9'
+    metrics_path: '/metrics/knowledge-graph'
+    scrape_interval: 60s
+
+  # Decision Engine
+  - job_name: 'decision-engine'
+    static_configs:
+      - targets: ['crypto-arbitrage:8080']
+        labels:
+          component: 'decision-engine'
+          version: 'v15.9'
+    metrics_path: '/metrics/decision-engine'
+    scrape_interval: 30s
+
+  # Arbitrage Engine
+  - job_name: 'arbitrage-engine'
+    static_configs:
+      - targets: ['crypto-arbitrage:8080']
+        labels:
+          component: 'arbitrage-engine'
+          version: 'v15.9'
+    metrics_path: '/metrics/arbitrage-engine'
+    scrape_interval: 15s
+
+  # Risk Management
+  - job_name: 'risk-management'
+    static_configs:
+      - targets: ['crypto-arbitrage:8080']
+        labels:
+          component: 'risk-management'
+          version: 'v15.9'
+    metrics_path: '/metrics/risk-management'
+    scrape_interval: 60s
+
+  # Storage System
+  - job_name: 'storage-system'
+    static_configs:
+      - targets: ['crypto-arbitrage:8080']
+        labels:
+          component: 'storage'
+          version: 'v15.9'
+    metrics_path: '/metrics/storage'
+    scrape_interval: 30s
+
+  # Redis Cache
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+        labels:
+          component: 'cache'
+    scrape_interval: 30s
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    scrape_interval: 60s
+
+  # Node Exporter (system metrics)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 30s

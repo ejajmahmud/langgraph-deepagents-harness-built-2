@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字货币套利交易系统 - 实时监控仪表板</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>CryptoArbitrage</h2>
+                <p>V3.3 Dashboard</p>
+            </div>
+
+            <nav class="navigation">
+                <a href="#overview" class="nav-item active" data-page="overview">
+                    <i class="icon">📊</i>
+                    <span>总览</span>
+                </a>
+                <a href="#risk" class="nav-item" data-page="risk">
+                    <i class="icon">⚠️</i>
+                    <span>风险监控</span>
+                </a>
+                <a href="#trade" class="nav-item" data-page="trade">
+                    <i class="icon">💹</i>
+                    <span>交易记录</span>
+                </a>
+                <a href="#strategy" class="nav-item" data-page="strategy">
+                    <i class="icon">🎯</i>
+                    <span>策略分析</span>
+                </a>
+                <a href="#performance" class="nav-item" data-page="performance">
+                    <i class="icon">⚡</i>
+                    <span>性能监控</span>
+                </a>
+                <a href="#alerts" class="nav-item" data-page="alerts">
+                    <i class="icon">🔔</i>
+                    <span>告警中心</span>
+                </a>
+            </nav>
+
+            <div class="system-info">
+                <div class="info-item">
+                    <span class="label">运行时间</span>
+                    <span class="value" id="uptime">--</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">系统状态</span>
+                    <span class="value status-running" id="system-status">运行中</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">最后更新</span>
+                    <span class="value" id="last-update">--</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 总览页面 -->
+            <section id="overview" class="page active">
+                <div class="page-header">
+                    <h1>系统总览</h1>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="refresh-btn">刷新</button>
+                        <button class="btn btn-secondary" id="export-btn">导出数据</button>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <!-- 关键指标卡片 -->
+                    <div class="metric-card">
+                        <div class="metric-icon profit-icon">💰</div>
+                        <div class="metric-content">
+                            <h3>总盈亏</h3>
+                            <p class="metric-value" id="total-profit-loss">$0.00</p>
+                            <p class="metric-change" id="profit-change">+0%</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon trade-icon">📈</div>
+                        <div class="metric-content">
+                            <h3>总交易数</h3>
+                            <p class="metric-value" id="total-trades">0</p>
+                            <p class="metric-change" id="trade-rate">胜率 0%</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon risk-icon">⚠️</div>
+                        <div class="metric-content">
+                            <h3>风险等级</h3>
+                            <p class="metric-value" id="risk-level">LOW</p>
+                            <p class="metric-change" id="risk-trend">稳定</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon performance-icon">⚡</div>
+                        <div class="metric-content">
+                            <h3>系统性能</h3>
+                            <p class="metric-value" id="system-performance">良好</p>
+                            <p class="metric-change" id="performance-trend">优化</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="chart-container">
+                        <h3>收益曲线</h3>
+                        <canvas id="profit-chart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>风险趋势</h3>
+                        <canvas id="risk-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="tables-row">
+                    <div class="table-container">
+                        <h3>最近交易</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>策略</th>
+                                    <th>结果</th>
+                                    <th>盈亏</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-trades">
+                                <tr><td colspan="4" class="no-data">暂无数据</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-container">
+                        <h3>最新告警</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>级别</th>
+                                    <th>消息</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-alerts">
+                                <tr><td colspan="3" class="no-data">暂无告警</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 风险监控页面 -->
+            <section id="risk" class="page">
+                <div class="page-header">
+                    <h1>风险监控</h1>
+                </div>
+
+                <div class="risk-metrics">
+                    <div class="risk-item">
+                        <div class="risk-label">敞口风险</div>
+                        <div class="risk-bar">
+                            <div class="risk-progress" id="exposure-bar"></div>
+                        </div>
+                        <div class="risk-value" id="exposure-value">0%</div>
+                    </div>
+
+                    <div class="risk-item">
+                        <div class="risk-label">波动率风险</div>
+                        <div class="risk-bar">
+                            <div class="risk-progress" id="volatility-bar"></div>
+                        </div>
+                        <div class="risk-value" id="volatility-value">0%</div>
+                    </div>
+
+                    <div class="risk-item">
+                        <div class="risk-label">流动性风险</div>
+                        <div class="risk-bar">
+                            <div class="risk-progress" id="liquidity-bar"></div>
+                        </div>
+                        <div class="risk-value" id="liquidity-value">0%</div>
+                    </div>
+
+                    <div class="risk-item">
+                        <div class="risk-label">回撤风险</div>
+                        <div class="risk-bar">
+                            <div class="risk-progress" id="drawdown-bar"></div>
+                        </div>
+                        <div class="risk-value" id="drawdown-value">0%</div>
+                    </div>
+
+                    <div class="risk-item">
+                        <div class="risk-label">相关性风险</div>
+                        <div class="risk-bar">
+                            <div class="risk-progress" id="correlation-bar"></div>
+                        </div>
+                        <div class="risk-value" id="correlation-value">0%</div>
+                    </div>
+
+                    <div class="risk-item">
+                        <div class="risk-label">集中度风险</div>
+                        <div class="risk-bar">
+                            <div class="risk-progress" id="concentration-bar"></div>
+                        </div>
+                        <div class="risk-value" id="concentration-value">0%</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 交易记录页面 -->
+            <section id="trade" class="page">
+                <div class="page-header">
+                    <h1>交易记录</h1>
+                </div>
+
+                <div class="trade-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">总交易数</div>
+                        <div class="stat-value" id="stat-total-trades">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">成功交易</div>
+                        <div class="stat-value success" id="stat-success-trades">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">失败交易</div>
+                        <div class="stat-value failed" id="stat-failed-trades">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">胜率</div>
+                        <div class="stat-value" id="stat-win-rate">0%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">总盈利</div>
+                        <div class="stat-value profit" id="stat-total-profit">$0.00</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">总亏损</div>
+                        <div class="stat-value loss" id="stat-total-loss">$0.00</div>
+                    </div>
+                </div>
+
+                <div class="table-container full-width">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>策略</th>
+                                <th>交易对</th>
+                                <th>结果</th>
+                                <th>盈亏</th>
+                                <th>执行时间</th>
+                                <th>风险等级</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trade-table-body">
+                            <tr><td colspan="7" class="no-data">暂无交易记录</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 策略分析页面 -->
+            <section id="strategy" class="page">
+                <div class="page-header">
+                    <h1>策略分析</h1>
+                </div>
+
+                <div class="strategy-cards" id="strategy-cards">
+                    <!-- 策略卡片将通过 JS 动态生成 -->
+                </div>
+            </section>
+
+            <!-- 性能监控页面 -->
+            <section id="performance" class="page">
+                <div class="page-header">
+                    <h1>性能监控</h1>
+                </div>
+
+                <div class="performance-metrics">
+                    <div class="perf-item">
+                        <div class="perf-label">CPU 使用率</div>
+                        <div class="perf-bar">
+                            <div class="perf-progress" id="cpu-bar"></div>
+                        </div>
+                        <div class="perf-value" id="cpu-value">0%</div>
+                    </div>
+
+                    <div class="perf-item">
+                        <div class="perf-label">内存使用率</div>
+                        <div class="perf-bar">
+                            <div class="perf-progress" id="memory-bar"></div>
+                        </div>
+                        <div class="perf-value" id="memory-value">0%</div>
+                    </div>
+
+                    <div class="perf-item">
+                        <div class="perf-label">磁盘使用率</div>
+                        <div class="perf-bar">
+                            <div class="perf-progress" id="disk-bar"></div>
+                        </div>
+                        <div class="perf-value" id="disk-value">0%</div>
+                    </div>
+
+                    <div class="perf-item">
+                        <div class="perf-label">API 延迟</div>
+                        <div class="perf-bar">
+                            <div class="perf-progress" id="api-latency-bar"></div>
+                        </div>
+                        <div class="perf-value" id="api-latency-value">0ms</div>
+                    </div>
+
+                    <div class="perf-item">
+                        <div class="perf-label">处理时间</div>
+                        <div class="perf-bar">
+                            <div class="perf-progress" id="processing-time-bar"></div>
+                        </div>
+                        <div class="perf-value" id="processing-time-value">0ms</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>性能趋势</h3>
+                    <canvas id="performance-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- 告警中心页面 -->
+            <section id="alerts" class="page">
+                <div class="page-header">
+                    <h1>告警中心</h1>
+                    <div class="actions">
+                        <button class="btn btn-secondary" id="clear-alerts-btn">清除告警</button>
+                    </div>
+                </div>
+
+                <div class="alert-stats">
+                    <div class="alert-stat critical">
+                        <div class="alert-stat-label">严重</div>
+                        <div class="alert-stat-value" id="critical-count">0</div>
+                    </div>
+                    <div class="alert-stat warning">
+                        <div class="alert-stat-label">警告</div>
+                        <div class="alert-stat-value" id="warning-count">0</div>
+                    </div>
+                    <div class="alert-stat info">
+                        <div class="alert-stat-label">信息</div>
+                        <div class="alert-stat-value" id="info-count">0</div>
+                    </div>
+                </div>
+
+                <div class="table-container full-width">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>级别</th>
+                                <th>类型</th>
+                                <th>消息</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alerts-table-body">
+                            <tr><td colspan="5" class="no-data">暂无告警</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 通知提示 -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

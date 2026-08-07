@@ -1,0 +1,37 @@
+{
+  "imports": {
+    "status": "success",
+    "modules": [
+      "hybrid_memo0_storage",
+      "low_risk_arbitrage_engine",
+      "knowledge_base",
+      "deep_risk_manager"
+    ]
+  },
+  "storage": {
+    "status": "success",
+    "storage_type": "HybridMemo0Storage"
+  },
+  "knowledge_base": {
+    "status": "success",
+    "kb_type": "KnowledgeBase",
+    "statistics": {
+      "strategies_count": 3,
+      "patterns_count": 3,
+      "risk_events_count": 0,
+      "trades_count": 0,
+      "performance_records_count": 0,
+      "knowledge_entries_count": 8,
+      "total_profit": 0.0,
+      "win_rate": 0.0
+    }
+  },
+  "risk_manager": {
+    "status": "success",
+    "risk_manager_type": "DeepRiskManager"
+  },
+  "arbitrage_engine": {
+    "status": "success",
+    "engine_type": "LowRiskArbitrageEngine"
+  }
+}
